@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtTyDpApIndvCustWMapper">
+	
+
+    <resultMap id="DtTyDpApIndvCustWResult" type="DtTyDpApIndvCustW">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+        <result property="certType" column="CERT_TYPE"/>
+        <result property="certNo" column="CERT_NO"/>
+        <result property="age" column="AGE"/>
+        <result property="marriageStatusCd" column="MARRIAGE_STATUS_CD"/>
+        <result property="cgbCustTypeCd" column="CGB_CUST_TYPE_CD"/>
+        <result property="genderCd" column="GENDER_CD"/>
+        <result property="resdntAddr" column="RESDNT_ADDR"/>
+        <result property="ethnicCd" column="ETHNIC_CD"/>
+        <result property="higtEduDegreeCd" column="HIGT_EDU_DEGREE_CD"/>
+        <result property="birthDt" column="BIRTH_DT"/>
+        <result property="employSitu" column="EMPLOY_SITU"/>
+        <result property="salaryCorp" column="SALARY_CORP"/>
+        <result property="corpChar" column="CORP_CHAR"/>
+        <result property="indus" column="INDUS"/>
+        <result property="corpAddr" column="CORP_ADDR"/>
+        <result property="corpTel" column="CORP_TEL"/>
+        <result property="career" column="CAREER"/>
+        <result property="pos" column="POS"/>
+        <result property="title" column="TITLE"/>
+        <result property="enterCorpYear" column="ENTER_CORP_YEAR"/>
+        <result property="infoUpdateDt" column="INFO_UPDATE_DT"/>
+        <result property="phone" column="PHONE"/>
+        <result property="email" column="EMAIL"/>
+        <result property="spouseName" column="SPOUSE_NAME"/>
+        <result property="spouseCertTypeCd" column="SPOUSE_CERT_TYPE_CD"/>
+        <result property="spouseCertNo" column="SPOUSE_CERT_NO"/>
+        <result property="spouseWorkUnitName" column="SPOUSE_WORK_UNIT_NAME"/>
+        <result property="spouseContAddr" column="SPOUSE_CONT_ADDR"/>
+        <result property="belongBrch" column="BELONG_BRCH"/>
+        <result property="custMgr" column="CUST_MGR"/>
+        <result property="custMgrTel" column="CUST_MGR_TEL"/>
+        <result property="etlDt" column="ETL_DT"/>
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="getDtTyDpApIndvCustWByNo" parameterType="String" resultType="DtTyDpApIndvCustW" resultMap="DtTyDpApIndvCustWResult">
+        select * from DT_TY_DP_AP_INDV_CUST_W
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

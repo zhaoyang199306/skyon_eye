@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DpRmMonUnPriProMicMapper">
+	
+
+    <resultMap id="DpRmMonUnPriProMicResult" type="DpRmMonUnPriProMic">
+
+        <result property="orgCode" column="org_code"/>
+        <result property="analyTime" column="analy_time"/>
+        <result property="unPriProRedRiskNum" column="un_pri_pro_red_risk_num"/>
+        <result property="unPriProRedRiskCustNum" column="un_pri_pro_red_risk_cust_num"/>
+        <result property="unPriProOraRiskNum" column="un_pri_pro_ora_risk_num"/>
+        <result property="unPriProOraRiskCustNum" column="un_pri_pro_ora_risk_cust_num"/>
+        <result property="unPriProYelRiskNum" column="un_pri_pro_yel_risk_num"/>
+        <result property="unPriProYelRiskCustNum" column="un_pri_pro_yel_risk_cust_num"/>
+
+    </resultMap>
+	
+	<select id="selectDpRmMonUnPriProMic" parameterType="String"
+            resultType="DpRmMonUnPriProMic" resultMap="DpRmMonUnPriProMicResult">
+        select * from DP_RM_MON_UN_PRI_PRO_MIC
+        where to_char(analy_time,'yyyy-MM') <![CDATA[<=#{date} ]]>
+    </select>
+
+
+
+
+</mapper> 

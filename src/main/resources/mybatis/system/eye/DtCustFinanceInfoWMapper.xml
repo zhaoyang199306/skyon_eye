@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtCustFinanceInfoWMapper">
+	
+
+    <resultMap id="DtCustFinanceInfoWResult" type="DtCustFinanceInfoW">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+        <result property="cfaeAmt" column="cfae_amt"/>
+        <result property="totalSum" column="total_sum"/>
+        <result property="lonBal" column="lon_bal"/>
+        <result property="creditCardAmt" column="credit_card_amt"/>
+        <result property="txBal" column="tx_bal"/>
+        <result property="contTotalAmt" column="cont_total_amt"/>
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="selectDtCustFinanceInfoW" parameterType="String" resultType="DtCustFinanceInfoW" resultMap="DtCustFinanceInfoWResult">
+        select * from DT_CUST_FINANCE_INFO_W
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

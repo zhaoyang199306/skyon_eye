@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtCustRiskFhfkDhSifacdkAMapper">
+	
+
+    <resultMap id="DtCustRiskFhfkDhSifacdkAResult" type="DtCustRiskFhfkDhSifacdkA">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="caption" column="caption"/>
+        <result property="assetCate" column="asset_cate"/>
+        <result property="subjMatterName" column="ETL_TIMESTAMP"/>
+        <result property="eventName" column="event_name"/>
+        <result property="courtName" column="court_name"/>
+        <result property="contentOutline" column="content_outline"/>
+        <result property="etlDt" column="etl_dt"/>
+
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="selectDtCustRiskFhfkDhSifacdkA" parameterType="String" resultType="DtCustRiskFhfkDhSifacdkA" resultMap="DtCustRiskFhfkDhSifacdkAResult">
+        select * from DT_CUST_RISK_FHFK_DH_SIFACDK_A
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

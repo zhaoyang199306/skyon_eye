@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DpRmMonAgrUndraStoMapper">
+	
+
+    <resultMap id="DpRmMonAgrUndraStoResult" type="com.skyon.project.system.domain.eye.DpRmMonAgrUndraSto">
+
+        <result property="orgCode" column="org_code"/>
+        <result property="analyTime" column="analy_time"/>
+        <result property="agrUndraRiskCustNum" column="agr_undra_risk_cust_num"/>
+        <result property="agrUndraRiskCustBal" column="agr_undra_risk_cust_bal"/>
+        <result property="stoRiskCustNum" column="sto_risk_cust_num"/>
+        <result property="stoRiskCustBal" column="sto_risk_cust_bal"/>
+
+    </resultMap>
+	
+	<select id="selectDpRmMonAgrUndraSto" parameterType="String"
+            resultType="DpRmMonAgrUndraSto" resultMap="DpRmMonAgrUndraStoResult">
+        select * from DP_RM_MON_AGR_UNDRA_STO
+        where to_char(analy_time,'yyyy-MM')  <![CDATA[<=#{date} ]]>
+    </select>
+
+
+
+
+</mapper> 

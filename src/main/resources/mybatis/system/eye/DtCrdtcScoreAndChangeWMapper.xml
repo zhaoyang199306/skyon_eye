@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtCrdtcScoreAndChangeWMapper">
+	
+
+    <resultMap id="DtCrdtcScoreAndChangeWResult" type="DtCrdtcScoreAndChangeW">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="currCrdtcScoreScore" column="curr_crdtc_score_score"/>
+        <result property="oppoPosition" column="oppo_position"/>
+        <result property="scoreExplain" column="score_explain"/>
+        <result property="linkRelatScore" column="link_relat_score"/>
+        <result property="linkRelatScoreChangeRatio" column="link_relat_score_change_ratio"/>
+        <result property="linkRelatScoreOppoPosition" column="link_relat_score_oppo_position"/>
+
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="etlDt" column="etl_Dt"/>
+    </resultMap>
+	
+	<select id="selectDtCrdtcScoreAndChangeW" parameterType="String"
+            resultType="DtCrdtcScoreAndChangeW" resultMap="DtCrdtcScoreAndChangeWResult">
+         select t.* from (
+            select w.* from DT_CRDTC_SCORE_AND_CHANGE_W  w
+            where w.cust_no = #{custNo} order by etl_Dt desc) t
+       <![CDATA[where rownum = 1]]>
+    </select>
+
+
+
+
+</mapper> 

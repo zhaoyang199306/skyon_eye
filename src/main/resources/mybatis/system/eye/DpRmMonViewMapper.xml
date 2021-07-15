@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DpRmMonViewMapper">
+	
+
+    <resultMap id="DpRmMonViewResult" type="DpRmMonView">
+
+        <result property="orgCode" column="org_code"/>
+        <result property="analyTime" column="analy_time"/>
+        <result property="priProRiskNum" column="pri_pro_risk_num"/>
+        <result property="unPriProRiskNum" column="un_pri_pro_risk_num"/>
+        <result property="priProWarnCustNum" column="pri_pro_warn_cust_num"/>
+        <result property="unPriProWarnCustNum" column="un_pri_pro_warn_cust_num"/>
+        <result property="priProRiskCustBal" column="pri_pro_risk_cust_bal"/>
+        <result property="unPriProRiskCustBal" column="un_pri_pro_risk_cust_bal"/>
+        <result property="priProWarnCustBal" column="pri_pro_warn_cust_bal"/>
+        <result property="unPriProWarnCustBal" column="un_pri_pro_warn_cust_bal"/>
+        <result property="priProRiskCustNum" column="pri_pro_risk_cust_num"/>
+        <result property="unPriProRiskCustNum" column="un_pri_pro_risk_cust_num"/>
+
+    </resultMap>
+	
+	<select id="selectDpRmMonView" parameterType="String"
+            resultType="DpRmMonView" resultMap="DpRmMonViewResult">
+        select * from DP_RM_MON_VIEW
+        where to_char(analy_time,'yyyy-MM') <![CDATA[<=#{date} ]]>
+    </select>
+
+
+
+
+</mapper> 

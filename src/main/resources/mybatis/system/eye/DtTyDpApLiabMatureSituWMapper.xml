@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtTyDpApLiabMatureSituWMapper">
+	
+
+    <resultMap id="DtTyDpApLiabMatureSituWResult" type="DtTyDpApLiabMatureSituW">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="thYearIntMatureCnt" column="th_year_int_mature_cnt"/>
+        <result property="thYearMatureAmt" column="th_year_mature_amt"/>
+        <result property="thYearMaxAmt" column="th_year_max_amt"/>
+        <result property="after1YearIntMatureCnt" column="after_1_year_int_mature_cnt"/>
+        <result property="after1YearMatureAmt" column="after_1_year_mature_amt"/>
+        <result property="after1YearMaxAmt" column="after_1_year_max_amt"/>
+        <result property="afterY2IntMatureCnt" column="after_y2_int_mature_cnt"/>
+        <result property="afterY2MatureAmt" column="after_y2_mature_amt"/>
+        <result property="afterY2MaxAmt" column="after_y2_max_amt"/>
+
+        <result property="etlDt" column="etl_Dt"/>
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+    </resultMap>
+	
+	<select id="selectDtTyDpApLiabMatureSituW" parameterType="String"
+             resultType="DtTyDpApLiabMatureSituW" resultMap="DtTyDpApLiabMatureSituWResult">
+        select * from (
+                select * from DT_TY_DP_AP_LIAB_MATURE_SITU_W  w
+                where w.cust_no = #{custNo} order by w.etl_Dt desc) t
+        <![CDATA[where rownum = 1]]>
+    </select>
+
+
+
+
+</mapper> 

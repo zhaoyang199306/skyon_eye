@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.Dp360GuaranteeInfoMapper">
+	
+
+    <resultMap id="Dp360GuaranteeInfoResult" type="Dp360GuaranteeInfo">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="guarantor" column="guarantor"/>
+        <result property="correlation" column="correlation"/>
+        <result property="guarantLoanName" column="guarant_loan_name"/>
+        <result property="guaranteedPerson" column="guaranteed_person"/>
+        <result property="guarantAmount" column="guarant_amount"/>
+        <result property="guarantWay" column="guarant_way"/>
+        <result property="guarantDate" column="guarant_date"/>
+        <result property="guarantDueDate" column="guarant_due_date"/>
+        <result property="guarantLoanBal" column="guarant_loan_bal"/>
+        <result property="guarantLoanLevel5Class" column="guarant_loan_level5_class"/>
+        <result property="guarantLoanOrg" column="guarant_loan_org"/>
+        <result property="ifThisBank" column="if_this_bank"/>
+
+        <result property="etlDt" column="etl_dt"/>
+        <result property="etlTime" column="etl_time"/>
+    </resultMap>
+	
+	<select id="selectDp360GuaranteeInfo" parameterType="String"
+            resultType="Dp360GuaranteeInfo" resultMap="Dp360GuaranteeInfoResult">
+        select * from DP_360_GUARANTEE_INFO
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

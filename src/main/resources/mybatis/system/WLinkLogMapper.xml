@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.WLinkLogMapper">
+	
+
+    <resultMap id="WLinkLogResult" type="WLinkLog">
+        <id property="id" column="id"/>
+        <result property="taskNum" column="task_num"/>
+        <result property="taskInfoNo" column="task_Info_No"/>
+        <result property="dealRole" column="deal_role"/>
+        <result property="dealUser" column="deal_User"/>
+        <result property="operation" column="operation"/>
+        <result property="examinValue" column="examin_Value"/>
+        <result property="custLevel" column="cust_Level"/>
+        <result property="riskValue" column="risk_Value"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+	
+	<insert id="insertWLinkLog" parameterType="WLinkLog">
+        insert into w_link_log (
+            <if test="id != null ">id,</if>
+            <if test="taskNum != null">task_num,</if>
+            <if test="taskInfoNo != null">task_Info_No,</if>
+            <if test="dealRole != null">deal_role,</if>
+            <if test="dealUser != null">deal_User,</if>
+            <if test="operation != null">operation,</if>
+            <if test="examinValue != null">examin_Value,</if>
+            <if test="custLevel != null">cust_Level,</if>
+            <if test="riskValue != null">risk_Value,</if>
+            create_time
+        ) values (
+            <if test="id != null">#{id},</if>
+            <if test="taskNum != null">#{taskNum},</if>
+            <if test="taskInfoNo != null">#{taskInfoNo},</if>
+            <if test="dealRole != null">#{dealRole},</if>
+            <if test="dealUser != null ">#{dealUser},</if>
+            <if test="operation != null ">#{operation},</if>
+            <if test="examinValue != null ">#{examinValue},</if>
+            <if test="custLevel != null ">#{custLevel},</if>
+            <if test="riskValue != null ">#{riskValue},</if>
+            sysdate
+        )
+    </insert>
+    
+    <select id="getListByTaskInfoNo" parameterType="String" resultMap="WLinkLogResult">
+        select * from w_link_log where task_Info_No = #{taskInfoNo}
+    </select>
+
+    <delete id="deleteWLinkLog" parameterType="String"  >
+        delete from w_link_log where task_Info_No = #{taskInfoNo}
+    </delete>
+
+</mapper> 

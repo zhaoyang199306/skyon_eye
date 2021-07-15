@@ -1,0 +1,8 @@
+
+=squid:S11728"&Remove these unused method parameters.(ý±¬”
+T
+squid:S106n"9Replace this use of System.out or System.err by a logger.(Ö²ˆ¦þÿÿÿÿ
+Xsquid:S1126”"AReplace this if-then-else statement by a single return statement.(„‹á=
+Csquid:S1481:",Remove this unused "sysUser" local variable.(›š’“
+Fsquid:S1481O"/Remove this unused "expireTime" local variable.(ÅÖìö
+\squid:UnusedPrivateMethod‘"6Remove this unused private "verifyTokenExpire" method.(°¹ãë

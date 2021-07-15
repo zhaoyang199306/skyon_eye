@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtTyDpApPublicRecAMapper">
+	
+
+    <resultMap id="DtTyDpApPublicRecAResult" type="DtTyDpApPublicRecA">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="accumTaxArreaRecCnt" column="accum_tax_arrea_rec_cnt"/>
+        <result property="accumTaxArreaAmt" column="accum_tax_arrea_amt"/>
+        <result property="accumCivilJudgeCnt" column="accum_civil_judge_cnt"/>
+        <result property="accumCivilJudgeAmt" column="accum_civil_judge_amt"/>
+        <result property="accumEnforcCnt" column="accum_enforc_cnt"/>
+        <result property="accumEnforcAmt" column="accum_enforc_amt"/>
+        <result property="accumAdminPenalCnt" column="accum_admin_penal_cnt"/>
+        <result property="accumAdminPenalAmt" column="accum_admin_penal_amt"/>
+        <result property="currProviFundPayStatus" column="curr_provi_fund_pay_status"/>
+
+        <result property="etlDt" column="etl_Dt"/>
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+    </resultMap>
+	
+	<select id="selectDtTyDpApPublicRecA"
+            parameterType="String" resultType="DtTyDpApPublicRecA" resultMap="DtTyDpApPublicRecAResult">
+         select t.* from (
+            select w.* from DT_TY_DP_AP_PUBLIC_REC_A  w
+            where w.cust_no = #{custNo} order by etl_Dt desc) t
+       <![CDATA[where rownum = 1]]>
+    </select>
+
+
+
+
+</mapper> 

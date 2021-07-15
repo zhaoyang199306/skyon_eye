@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtCustRiskRefereeDocAMapper">
+	
+
+    <resultMap id="DtCustRiskRefereeDocAResult" type="DtCustRiskRefereeDocA">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="caption" column="caption"/>
+        <result property="caseNum" column="case_num"/>
+        <result property="caseReason" column="case_reason"/>
+        <result property="caseDt" column="case_dt"/>
+        <result property="contentOutline" column="content_outline"/>
+        <result property="judgeResult" column="judge_result"/>
+        <result property="courtName" column="court_name"/>
+
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="selectDtCustRiskRefereeDocA" parameterType="String" resultType="DtCustRiskRefereeDocA" resultMap="DtCustRiskRefereeDocAResult">
+        select * from DT_CUST_RISK_REFEREE_DOC_A
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

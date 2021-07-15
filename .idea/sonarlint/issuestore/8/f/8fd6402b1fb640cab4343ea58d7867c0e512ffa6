@@ -1,0 +1,4 @@
+
+isquid:UselessImportCheck"?Remove this unused import 'org.apache.ibatis.annotations.Case'.(Ã·ïm8™Ñ™ ¡/
+Xsquid:S1191"5Use classes from the Java API instead of Sun classes.(ğ¥Œùÿÿÿÿ8‹˜ ¡/
+[squid:UselessImportCheck"+Remove this unused import 'sun.nio.ch.Net'.(ğ¥Œùÿÿÿÿ8‹˜ ¡/

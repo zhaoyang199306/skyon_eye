@@ -1,0 +1,5 @@
+
+Hsquid:S1068",Remove this unused "totalNum" private field.(íÀìÀøÿÿÿÿ
+Hsquid:S1068",Remove this unused "totalBal" private field.(†ÜËóúÿÿÿÿ
+ssquid:S1450"WRemove the "totalBal" field and declare it as a local variable in the relevant methods.(†ÜËóúÿÿÿÿ
+ssquid:S1450"WRemove the "totalNum" field and declare it as a local variable in the relevant methods.(íÀìÀøÿÿÿÿ

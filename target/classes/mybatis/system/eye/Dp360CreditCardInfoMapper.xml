@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.Dp360CreditCardInfoMapper">
+	
+
+    <resultMap id="Dp360CreditCardInfoResult" type="Dp360CreditCardInfo">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="correlation" column="correlation"/>
+        <result property="openCardDate" column="open_card_date"/>
+        <result property="cardNo" column="card_no"/>
+        <result property="totalAmount" column="total_amount"/>
+        <result property="tmpAmount" column="tmp_amount"/>
+        <result property="currentAvailQuota" column="current_avail_quota"/>
+        <result property="installmentAmount" column="installment_amount"/>
+        <result property="wdrawalOdraftAmount" column="wdrawal_odraft_amount"/>
+        <result property="accountBal" column="account_bal"/>
+        <result property="overdueAmount" column="overdue_amount"/>
+        <result property="openCardOrg" column="open_card_org"/>
+        <result property="ifThisBank" column="if_this_bank"/>
+
+        <result property="etlDt" column="etl_dt"/>
+        <result property="etlTime" column="etl_time"/>
+    </resultMap>
+	
+	<select id="selectDp360CreditCardInfo" parameterType="String"
+            resultType="Dp360CreditCardInfo" resultMap="Dp360CreditCardInfoResult">
+        select * from DP_360_CREDIT_CARD_INFO
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

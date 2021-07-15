@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DpRmMonRuleSysIngMapper">
+	
+
+    <resultMap id="DpRmMonRuleSysIngResult" type="com.skyon.project.system.domain.eye.DpRmMonRuleSysIng">
+
+
+        <result property="prtNo" column="prt_no"/>
+        <result property="prtName" column="prt_name"/>
+        <result property="orgCode" column="org_code"/>
+        <result property="analyTime" column="analy_time"/>
+        <result property="warnCustNum" column="warn_cust_num"/>
+        <result property="warnCustBal" column="warn_cust_bal"/>
+        <result property="warnCustRate" column="warn_cust_rate"/>
+        <result property="accidCustNum" column="accid_cust_num"/>
+        <result property="accidCustBal" column="accid_cust_bal"/>
+        <result property="accidCustRate" column="accid_cust_rate"/>
+        <result property="hitCustNum" column="hit_cust_num"/>
+        <result property="hitCustBal" column="hit_cust_bal"/>
+        <result property="hitCustRate" column="hit_cust_rate"/>
+        <result property="affNum" column="aff_num"/>
+        <result property="affRiskCustNum" column="aff_risk_cust_num"/>
+        <result property="artAffNum" column="art_aff_num"/>
+        <result property="artAffRigNum" column="art_aff_rig_num"/>
+        <result property="artAffRigRate" column="art_aff_rig_rate"/>
+        <result property="artAffWrgNum" column="art_aff_wrg_num"/>
+        <result property="artAffWrgRate" column="art_aff_wrg_rate"/>
+        <result property="sysAffNum" column="sys_aff_num"/>
+        <result property="sysAffRigNum" column="sys_aff_rig_num"/>
+        <result property="sysAffRigRate" column="sys_aff_rig_rate"/>
+        <result property="sysAffWrgNum" column="sys_aff_wrg_num"/>
+        <result property="sysAffWrgRate" column="sys_aff_wrg_rate"/>
+        <result property="narSenRedAsBal" column="nar_sen_red_as_bal"/>
+        <result property="broSenRedAsBal" column="bro_sen_red_as_bal"/>
+        <result property="misDeteNum" column="mis_dete_num"/>
+        <result property="misDeteRate" column="mis_dete_rate"/>
+        <result property="misinNum" column="misin_num"/>
+        <result property="misinRate" column="misin_rate"/>
+        <result property="artAffWrgBal" column="ART_AFF_WRG_BAL"/>
+        <result property="sysAffWrgBal" column="SYS_AFF_WRG_BAL"/>
+        <result property="misDeteBal" column="MIS_DETE_BAL"/>
+        <result property="misinBal" column="MISIN_BAL"/>
+
+        <result property="days" column="days"/>
+        <result property="quarter" column="quarter"/>
+
+
+
+    </resultMap>
+	
+	<select id="selectDpRmMonRuleSysIngSum" parameterType="String"
+            resultType="DpRmMonRuleSysIng" resultMap="DpRmMonRuleSysIngResult">
+        select
+       nvl(sum(WARN_CUST_NUM),0) as WARN_CUST_NUM, -- 触警客户数
+       nvl(sum(WARN_CUST_BAL),0) as WARN_CUST_BAL, -- 触警客户余额
+       nvl(round(avg(WARN_CUST_RATE),2),0)  as WARN_CUST_RATE,               -- 触警率
+       nvl(sum(ACCID_CUST_NUM),0) as ACCID_CUST_NUM, -- 出险客户数
+       nvl(sum(ACCID_CUST_BAL),0) as ACCID_CUST_BAL, -- 出险客户余额
+        nvl(round(avg(ACCID_CUST_RATE),2 ),0)  as ACCID_CUST_RATE,               -- 出险率
+        nvl(sum(HIT_CUST_NUM),0) as HIT_CUST_NUM, -- 命中客户数
+       nvl(sum(HIT_CUST_BAL),0) as HIT_CUST_BAL, -- 命中客户余额
+        nvl(round(avg(HIT_CUST_RATE),2 ),0)  as HIT_CUST_RATE,               -- 命中率
+         nvl(sum(AFF_NUM),0) as AFF_NUM, -- 风险认定数
+        nvl(sum(AFF_RISK_CUST_NUM),0) as AFF_RISK_CUST_NUM, -- 认定为风险客户数
+        nvl(sum(ART_AFF_NUM),0) as ART_AFF_NUM, -- 人工风险认定数
+        nvl(sum(ART_AFF_RIG_NUM),0) as ART_AFF_RIG_NUM, -- 人工认风险定数准确数
+         nvl(round(avg(ART_AFF_RIG_RATE),2 ),0)  as ART_AFF_RIG_RATE,               -- 人工风险认定准确率
+         nvl(sum(SYS_AFF_NUM),0) as SYS_AFF_NUM, -- 系统风险认定数
+        nvl(sum(SYS_AFF_RIG_NUM),0) as SYS_AFF_RIG_NUM, -- 系统认风险定数准确数
+         nvl(round(avg(SYS_AFF_RIG_RATE),2 ),0)  as SYS_AFF_RIG_RATE,               -- 系统风险认定准确率
+
+         nvl(sum(ART_AFF_WRG_NUM),0) as ART_AFF_WRG_NUM, -- 人工认风险定数失误数
+        nvl(round(avg(ART_AFF_WRG_BAL),2 ),0)  as ART_AFF_WRG_BAL,  -- 人工认风险定数失余额
+         nvl(round(avg(ART_AFF_WRG_RATE),2 ),0)  as ART_AFF_WRG_RATE,               -- 人工风险认定失误率
+         nvl(sum(SYS_AFF_WRG_NUM),0) as SYS_AFF_WRG_NUM, -- 系统认风险定数失误数
+        nvl(round(avg(SYS_AFF_WRG_BAL),2 ),0)  as SYS_AFF_WRG_BAL,  -- 系统认风险定数失误余额
+         nvl(round(avg(SYS_AFF_WRG_RATE),2 ),0)  as SYS_AFF_WRG_RATE,               -- 系统风险认定失误率
+
+        nvl(sum(MIS_DETE_NUM),0) as MIS_DETE_NUM, -- 漏报客户数
+        nvl(round(avg(MIS_DETE_BAL),2 ),0)  as MIS_DETE_BAL,  -- 漏报余额
+         nvl(round(avg(MIS_DETE_RATE),2 ),0)  as MIS_DETE_RATE,               -- 漏警率
+         nvl(sum(MISIN_NUM),0) as MISIN_NUM, -- 误报客户数
+        nvl(round(avg(MISIN_BAL),2 ),0)  as MISIN_BAL,  -- 误报余额
+         nvl(round(avg(MISIN_RATE),2 ),0)  as MISIN_RATE               -- 误报率
+
+
+        from DP_RM_MON_RULE_SYS_ING
+        where analy_time <![CDATA[<=#{date} ]]>
+
+
+
+    </select>
+
+    <select id="selectDpRmMonRuleSysIngQuarter"
+            resultType="DpRmMonRuleSysIng" resultMap="DpRmMonRuleSysIngResult">
+        SELECT times.days,
+        times.quarter quarter,
+        nvl(sum(WARN_CUST_NUM),0) as WARN_CUST_NUM, -- 触警客户数
+        nvl(sum(WARN_CUST_BAL),0) as WARN_CUST_BAL, -- 触警客户余额
+        nvl(round(avg(WARN_CUST_RATE),2),0)  as WARN_CUST_RATE,               -- 触警率
+        nvl(sum(ACCID_CUST_NUM),0) as ACCID_CUST_NUM, -- 出险客户数
+        nvl(sum(ACCID_CUST_BAL),0) as ACCID_CUST_BAL, -- 出险客户余额
+        nvl(round(avg(ACCID_CUST_RATE),2 ),0)  as ACCID_CUST_RATE,               -- 出险率
+        nvl(sum(HIT_CUST_NUM),0) as HIT_CUST_NUM, -- 命中客户数
+        nvl(sum(HIT_CUST_BAL),0) as HIT_CUST_BAL, -- 命中客户余额
+        nvl(round(avg(HIT_CUST_RATE),2 ),0)  as HIT_CUST_RATE,               -- 命中率
+        nvl(sum(AFF_NUM),0) as AFF_NUM, -- 风险认定数
+        nvl(sum(AFF_RISK_CUST_NUM),0) as AFF_RISK_CUST_NUM, -- 认定为风险客户数
+        nvl(sum(ART_AFF_NUM),0) as ART_AFF_NUM, -- 人工风险认定数
+        nvl(sum(ART_AFF_RIG_NUM),0) as ART_AFF_RIG_NUM, -- 人工认风险定数准确数
+         nvl(round(avg(ART_AFF_RIG_RATE),2 ),0)  as ART_AFF_RIG_RATE,               -- 人工风险认定准确率
+         nvl(sum(SYS_AFF_NUM),0) as SYS_AFF_NUM, -- 系统风险认定数
+        nvl(sum(SYS_AFF_RIG_NUM),0) as SYS_AFF_RIG_NUM, -- 系统认风险定数准确数
+         nvl(round(avg(SYS_AFF_RIG_RATE),2 ),0)  as SYS_AFF_RIG_RATE,               -- 系统风险认定准确率
+
+         nvl(sum(ART_AFF_WRG_NUM),0) as ART_AFF_WRG_NUM, -- 人工认风险定数失误数
+        nvl(round(avg(ART_AFF_WRG_BAL),2 ),0)  as ART_AFF_WRG_BAL,  -- 人工认风险定数失余额
+         nvl(round(avg(ART_AFF_WRG_RATE),2 ),0)  as ART_AFF_WRG_RATE,               -- 人工风险认定失误率
+         nvl(sum(SYS_AFF_WRG_NUM),0) as SYS_AFF_WRG_NUM, -- 系统认风险定数失误数
+        nvl(round(avg(SYS_AFF_WRG_BAL),2 ),0)  as SYS_AFF_WRG_BAL,  -- 系统认风险定数失误余额
+         nvl(round(avg(SYS_AFF_WRG_RATE),2 ),0)  as SYS_AFF_WRG_RATE,               -- 系统风险认定失误率
+
+        nvl(sum(MIS_DETE_NUM),0) as MIS_DETE_NUM, -- 漏报客户数
+        nvl(round(avg(MIS_DETE_BAL),2 ),0)  as MIS_DETE_BAL,  -- 漏报余额
+         nvl(round(avg(MIS_DETE_RATE),2 ),0)  as MIS_DETE_RATE,               -- 漏警率
+         nvl(sum(MISIN_NUM),0) as MISIN_NUM, -- 误报客户数
+        nvl(round(avg(MISIN_BAL),2 ),0)  as MISIN_BAL,  -- 误报余额
+         nvl(round(avg(MISIN_RATE),2 ),0)  as MISIN_RATE               -- 误报率
+
+        FROM (SELECT * FROM DP_RM_MON_RULE_SYS_ING) e
+                RIGHT JOIN (select TO_CHAR(ADD_MONTHS(TO_DATE(to_char(trunc(to_date(#{date},'yyyy-MM'),'q'),'yyyy-mm'),'yyyy-MM'),-LEVEL + 1),'yyyyMM') days,
+                                    TO_CHAR(ADD_MONTHS(TO_DATE(to_char(trunc(sysdate,'q'),'yyy-mm'),'yyyy-MM'),-LEVEL + 1),'q') quarter
+        FROM dual
+        CONNECT BY LEVEL <![CDATA[<=#{mouths} ]]>) times
+        ON e.ANALY_TIME = times.days
+        GROUP BY times.days ,times.quarter
+        ORDER BY times.days desc
+
+
+    </select>
+
+    <select id="selectDpRmMonRuleSysIngBal" parameterType="String" resultType="DpRmMonRuleSysIng" resultMap="DpRmMonRuleSysIngResult">
+        select * from DP_RM_MON_RULE_SYS_ING s
+        where ANALY_TIME = #{date}
+    </select>
+
+
+
+
+</mapper>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtTyDpApLiabSituChangeWMapper">
+	
+
+    <resultMap id="DtTyDpApLiabSituChangeWResult" type="DtTyDpApLiabSituChangeW">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="debitCrdtBalChangeCnt" column="debit_crdt_bal_change_cnt"/>
+        <result property="debitCrdtBalChangeRatio" column="debit_crdt_bal_change_ratio"/>
+        <result property="finInstCntChange" column="fin_inst_cnt_change"/>
+        <result property="finInstCntChangeRatio" column="fin_inst_cnt_change_ratio"/>
+
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="etlDt" column="etl_Dt"/>
+    </resultMap>
+	
+	<select id="selectDtTyDpApLiabSituChangeW" parameterType="String"
+            resultType="DtTyDpApLiabSituChangeW" resultMap="DtTyDpApLiabSituChangeWResult">
+         select t.* from (
+            select w.* from DT_TY_DP_AP_LIAB_SITU_CHANGE_W  w
+            where w.cust_no = #{custNo} order by etl_Dt desc) t
+        <![CDATA[where rownum = 1]]>
+    </select>
+
+
+
+
+</mapper> 

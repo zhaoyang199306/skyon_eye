@@ -1,0 +1,245 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.PanoramicViewMapper">
+
+    <resultMap type="DP360CustInfo" id="Dp360CustInfoResult">
+        <result property="custNo"    column="cust_no"    />
+        <result property="custName"    column="cust_name"    />
+        <result property="certNo"    column="cert_no"    />
+        <result property="age"    column="age"    />
+        <result property="maritalStatus"    column="marital_status"    />
+        <result property="custType"    column="cust_type"    />
+        <result property="sex"    column="sex"    />
+        <result property="addr"    column="addr"    />
+        <result property="birday"    column="birday"    />
+        <result property="national"    column="national"    />
+        <result property="highestEducation"    column="highest_education"    />
+        <result property="certType"    column="cert_type"    />
+        <result property="employmentStatus"    column="employment_status"    />
+        <result property="workUnits"    column="work_units"    />
+        <result property="unitOfNature"    column="unit_of_nature"    />
+        <result property="industry"    column="industry"    />
+        <result property="unitAddress"    column="unit_address"    />
+        <result property="unitPhone"    column="unit_phone"    />
+        <result property="professional"    column="professional"    />
+        <result property="position"    column="position"    />
+        <result property="title"    column="title"    />
+        <result property="enterYearOfUnit"    column="enter_year_of_unit"    />
+        <result property="infoUpdateDate"    column="info_update_date"    />
+        <result property="contactNumber"    column="contact_number"    />
+        <result property="email"    column="email"    />
+        <result property="spouseName"    column="spouse_name"    />
+        <result property="spouseCertType"    column="spouse_cert_type"    />
+        <result property="spouseCertNo"    column="spouse_cert_no"    />
+        <result property="spouseWorkUnits"    column="spouse_work_units"    />
+        <result property="spouseContactNumber"    column="spouse_contact_number"    />
+        <result property="subBranch"    column="sub_branch"    />
+        <result property="branch"    column="branch"    />
+        <result property="custManager"    column="cust_manager"    />
+        <result property="custManagerPhone"    column="cust_manager_phone"    />
+        <result property="monitorType"    column="monitor_type"    />
+        <result property="setUpDate"    column="set_up_date"    />
+        <result property="registeredAssets"    column="registered_assets"    />
+        <result property="industryInvolved"    column="industry_involved"    />
+        <result property="signature"    column="signature"    />
+        <result property="organizationCode"    column="organization_code"    />
+        <result property="registeredAddress"    column="registered_address"    />
+        <result property="storeAddress"    column="store_address"    />
+        <result property="legalRepresentative"    column="legal_representative"    />
+        <result property="actualController"    column="actual_controller"    />
+        <result property="businessScope"    column="business_scope"    />
+    </resultMap>
+
+    <select id="selectPanoramicViewList" resultType="map">
+        select s.cust_no as custNo,s.cust_name as custName,'个人' as custType,s.monitor_type as monitorType,s.BELONG_BRCH as belongBrch,
+        s.CUST_MGR as custMgr from DT_TY_DP_AP_INDV_CUST_W s
+union all
+        select w.cust_no as custNo,w.cust_name as custName,'小微企业' as custType,w.monitor_type as monitorType,w.BELONG_BRCH as belongBrch,
+        w.cust_mgr as custMgr from DT_SM_MINI_CORP_CUST_W w
+    </select>
+
+    <sql id="selectDp360CustInfoVo">
+        select cust_no, cust_name, cert_no, age, marital_status, cust_type, sex, addr, birday, national, highest_education, cert_type, employment_status, work_units, unit_of_nature, industry, unit_address, unit_phone, professional, position, title, enter_year_of_unit, info_update_date, contact_number, email, spouse_name, spouse_cert_type, spouse_cert_no, spouse_work_units, spouse_contact_number, sub_branch, branch, cust_manager, cust_manager_phone, monitor_type, set_up_date, registered_assets, industry_involved, signature, organization_code, registered_address, store_address, legal_representative, actual_controller, business_scope from DP_360_CUST_INFO
+    </sql>
+
+    <select id="selectDp360CustInfoList" parameterType="DP360CustInfo" resultMap="Dp360CustInfoResult">
+        <include refid="selectDp360CustInfoVo"/>
+        <where>
+            <if test="custNo != null  and custNo != ''"> and cust_no like concat('%', #{custNo}, '%')</if>
+            <if test="custName != null  and custName != ''"> and cust_name like concat('%', #{custName}, '%')</if>
+            <if test="certNo != null  and certNo != ''"> and cert_no like concat('%', #{certNo}, '%')</if>
+            <if test="subBranch != null  and subBranch != ''"> and sub_branch like concat('%', #{subBranch}, '%')</if>
+            <if test="custManager != null  and custManager != ''"> and cust_manager = #{custManager}</if>
+        </where>
+    </select>
+
+    <select id="selectDp360CustInfoById" parameterType="String" resultMap="Dp360CustInfoResult">
+        <include refid="selectDp360CustInfoVo"/>
+        where cust_no = #{custNo}
+    </select>
+
+    <insert id="insertDp360CustInfo" parameterType="DP360CustInfo">
+        insert into DP_360_CUST_INFO
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="custNo != null  and custNo != ''">cust_no,</if>
+            <if test="custName != null  and custName != ''">cust_name,</if>
+            <if test="certNo != null  and certNo != ''">cert_no,</if>
+            <if test="age != null ">age,</if>
+            <if test="maritalStatus != null  and maritalStatus != ''">marital_status,</if>
+            <if test="custType != null  and custType != ''">cust_type,</if>
+            <if test="sex != null  and sex != ''">sex,</if>
+            <if test="addr != null  and addr != ''">addr,</if>
+            <if test="birday != null  and birday != ''">birday,</if>
+            <if test="national != null  and national != ''">national,</if>
+            <if test="highestEducation != null  and highestEducation != ''">highest_education,</if>
+            <if test="certType != null  and certType != ''">cert_type,</if>
+            <if test="employmentStatus != null  and employmentStatus != ''">employment_status,</if>
+            <if test="workUnits != null  and workUnits != ''">work_units,</if>
+            <if test="unitOfNature != null  and unitOfNature != ''">unit_of_nature,</if>
+            <if test="industry != null  and industry != ''">industry,</if>
+            <if test="unitAddress != null  and unitAddress != ''">unit_address,</if>
+            <if test="unitPhone != null  and unitPhone != ''">unit_phone,</if>
+            <if test="professional != null  and professional != ''">professional,</if>
+            <if test="position != null  and position != ''">position,</if>
+            <if test="title != null  and title != ''">title,</if>
+            <if test="enterYearOfUnit != null  and enterYearOfUnit != ''">enter_year_of_unit,</if>
+            <if test="infoUpdateDate != null ">info_update_date,</if>
+            <if test="contactNumber != null ">contact_number,</if>
+            <if test="email != null  and email != ''">email,</if>
+            <if test="spouseName != null  and spouseName != ''">spouse_name,</if>
+            <if test="spouseCertType != null  and spouseCertType != ''">spouse_cert_type,</if>
+            <if test="spouseCertNo != null ">spouse_cert_no,</if>
+            <if test="spouseWorkUnits != null  and spouseWorkUnits != ''">spouse_work_units,</if>
+            <if test="spouseContactNumber != null ">spouse_contact_number,</if>
+            <if test="subBranch != null  and subBranch != ''">sub_branch,</if>
+            <if test="branch != null  and branch != ''">branch,</if>
+            <if test="custManager != null  and custManager != ''">cust_manager,</if>
+            <if test="custManagerPhone != null  and custManagerPhone != ''">cust_manager_phone,</if>
+            <if test="monitorType != null  and monitorType != ''">monitor_type,</if>
+            <if test="setUpDate != null ">set_up_date,</if>
+            <if test="registeredAssets != null  and registeredAssets != ''">registered_assets,</if>
+            <if test="industryInvolved != null  and industryInvolved != ''">industry_involved,</if>
+            <if test="signature != null  and signature != ''">signature,</if>
+            <if test="organizationCode != null  and organizationCode != ''">organization_code,</if>
+            <if test="registeredAddress != null  and registeredAddress != ''">registered_address,</if>
+            <if test="storeAddress != null  and storeAddress != ''">store_address,</if>
+            <if test="legalRepresentative != null  and legalRepresentative != ''">legal_representative,</if>
+            <if test="actualController != null  and actualController != ''">actual_controller,</if>
+            <if test="businessScope != null  and businessScope != ''">business_scope,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="custNo != null  and custNo != ''">#{custNo},</if>
+            <if test="custName != null  and custName != ''">#{custName},</if>
+            <if test="certNo != null  and certNo != ''">#{certNo},</if>
+            <if test="age != null ">#{age},</if>
+            <if test="maritalStatus != null  and maritalStatus != ''">#{maritalStatus},</if>
+            <if test="custType != null  and custType != ''">#{custType},</if>
+            <if test="sex != null  and sex != ''">#{sex},</if>
+            <if test="addr != null  and addr != ''">#{addr},</if>
+            <if test="birday != null  and birday != ''">#{birday},</if>
+            <if test="national != null  and national != ''">#{national},</if>
+            <if test="highestEducation != null  and highestEducation != ''">#{highestEducation},</if>
+            <if test="certType != null  and certType != ''">#{certType},</if>
+            <if test="employmentStatus != null  and employmentStatus != ''">#{employmentStatus},</if>
+            <if test="workUnits != null  and workUnits != ''">#{workUnits},</if>
+            <if test="unitOfNature != null  and unitOfNature != ''">#{unitOfNature},</if>
+            <if test="industry != null  and industry != ''">#{industry},</if>
+            <if test="unitAddress != null  and unitAddress != ''">#{unitAddress},</if>
+            <if test="unitPhone != null  and unitPhone != ''">#{unitPhone},</if>
+            <if test="professional != null  and professional != ''">#{professional},</if>
+            <if test="position != null  and position != ''">#{position},</if>
+            <if test="title != null  and title != ''">#{title},</if>
+            <if test="enterYearOfUnit != null  and enterYearOfUnit != ''">#{enterYearOfUnit},</if>
+            <if test="infoUpdateDate != null ">#{infoUpdateDate},</if>
+            <if test="contactNumber != null ">#{contactNumber},</if>
+            <if test="email != null  and email != ''">#{email},</if>
+            <if test="spouseName != null  and spouseName != ''">#{spouseName},</if>
+            <if test="spouseCertType != null  and spouseCertType != ''">#{spouseCertType},</if>
+            <if test="spouseCertNo != null ">#{spouseCertNo},</if>
+            <if test="spouseWorkUnits != null  and spouseWorkUnits != ''">#{spouseWorkUnits},</if>
+            <if test="spouseContactNumber != null ">#{spouseContactNumber},</if>
+            <if test="subBranch != null  and subBranch != ''">#{subBranch},</if>
+            <if test="branch != null  and branch != ''">#{branch},</if>
+            <if test="custManager != null  and custManager != ''">#{custManager},</if>
+            <if test="custManagerPhone != null  and custManagerPhone != ''">#{custManagerPhone},</if>
+            <if test="monitorType != null  and monitorType != ''">#{monitorType},</if>
+            <if test="setUpDate != null ">#{setUpDate},</if>
+            <if test="registeredAssets != null  and registeredAssets != ''">#{registeredAssets},</if>
+            <if test="industryInvolved != null  and industryInvolved != ''">#{industryInvolved},</if>
+            <if test="signature != null  and signature != ''">#{signature},</if>
+            <if test="organizationCode != null  and organizationCode != ''">#{organizationCode},</if>
+            <if test="registeredAddress != null  and registeredAddress != ''">#{registeredAddress},</if>
+            <if test="storeAddress != null  and storeAddress != ''">#{storeAddress},</if>
+            <if test="legalRepresentative != null  and legalRepresentative != ''">#{legalRepresentative},</if>
+            <if test="actualController != null  and actualController != ''">#{actualController},</if>
+            <if test="businessScope != null  and businessScope != ''">#{businessScope},</if>
+        </trim>
+    </insert>
+
+    <update id="updateDp360CustInfo" parameterType="DP360CustInfo">
+        update DP_360_CUST_INFO
+        <trim prefix="SET" suffixOverrides=",">
+            <if test="custName != null  and custName != ''">cust_name = #{custName},</if>
+            <if test="certNo != null  and certNo != ''">cert_no = #{certNo},</if>
+            <if test="age != null ">age = #{age},</if>
+            <if test="maritalStatus != null  and maritalStatus != ''">marital_status = #{maritalStatus},</if>
+            <if test="custType != null  and custType != ''">cust_type = #{custType},</if>
+            <if test="sex != null  and sex != ''">sex = #{sex},</if>
+            <if test="addr != null  and addr != ''">addr = #{addr},</if>
+            <if test="birday != null  and birday != ''">birday = #{birday},</if>
+            <if test="national != null  and national != ''">national = #{national},</if>
+            <if test="highestEducation != null  and highestEducation != ''">highest_education = #{highestEducation},</if>
+            <if test="certType != null  and certType != ''">cert_type = #{certType},</if>
+            <if test="employmentStatus != null  and employmentStatus != ''">employment_status = #{employmentStatus},</if>
+            <if test="workUnits != null  and workUnits != ''">work_units = #{workUnits},</if>
+            <if test="unitOfNature != null  and unitOfNature != ''">unit_of_nature = #{unitOfNature},</if>
+            <if test="industry != null  and industry != ''">industry = #{industry},</if>
+            <if test="unitAddress != null  and unitAddress != ''">unit_address = #{unitAddress},</if>
+            <if test="unitPhone != null  and unitPhone != ''">unit_phone = #{unitPhone},</if>
+            <if test="professional != null  and professional != ''">professional = #{professional},</if>
+            <if test="position != null  and position != ''">position = #{position},</if>
+            <if test="title != null  and title != ''">title = #{title},</if>
+            <if test="enterYearOfUnit != null  and enterYearOfUnit != ''">enter_year_of_unit = #{enterYearOfUnit},</if>
+            <if test="infoUpdateDate != null ">info_update_date = #{infoUpdateDate},</if>
+            <if test="contactNumber != null ">contact_number = #{contactNumber},</if>
+            <if test="email != null  and email != ''">email = #{email},</if>
+            <if test="spouseName != null  and spouseName != ''">spouse_name = #{spouseName},</if>
+            <if test="spouseCertType != null  and spouseCertType != ''">spouse_cert_type = #{spouseCertType},</if>
+            <if test="spouseCertNo != null ">spouse_cert_no = #{spouseCertNo},</if>
+            <if test="spouseWorkUnits != null  and spouseWorkUnits != ''">spouse_work_units = #{spouseWorkUnits},</if>
+            <if test="spouseContactNumber != null ">spouse_contact_number = #{spouseContactNumber},</if>
+            <if test="subBranch != null  and subBranch != ''">sub_branch = #{subBranch},</if>
+            <if test="branch != null  and branch != ''">branch = #{branch},</if>
+            <if test="custManager != null  and custManager != ''">cust_manager = #{custManager},</if>
+            <if test="custManagerPhone != null  and custManagerPhone != ''">cust_manager_phone = #{custManagerPhone},</if>
+            <if test="monitorType != null  and monitorType != ''">monitor_type = #{monitorType},</if>
+            <if test="setUpDate != null ">set_up_date = #{setUpDate},</if>
+            <if test="registeredAssets != null  and registeredAssets != ''">registered_assets = #{registeredAssets},</if>
+            <if test="industryInvolved != null  and industryInvolved != ''">industry_involved = #{industryInvolved},</if>
+            <if test="signature != null  and signature != ''">signature = #{signature},</if>
+            <if test="organizationCode != null  and organizationCode != ''">organization_code = #{organizationCode},</if>
+            <if test="registeredAddress != null  and registeredAddress != ''">registered_address = #{registeredAddress},</if>
+            <if test="storeAddress != null  and storeAddress != ''">store_address = #{storeAddress},</if>
+            <if test="legalRepresentative != null  and legalRepresentative != ''">legal_representative = #{legalRepresentative},</if>
+            <if test="actualController != null  and actualController != ''">actual_controller = #{actualController},</if>
+            <if test="businessScope != null  and businessScope != ''">business_scope = #{businessScope},</if>
+        </trim>
+        where cust_no = #{custNo}
+    </update>
+
+    <delete id="deleteDp360CustInfoById" parameterType="String">
+        delete from DP_360_CUST_INFO where cust_no = #{custNo}
+    </delete>
+
+    <delete id="deleteDp360CustInfoByIds" parameterType="String">
+        delete from DP_360_CUST_INFO where cust_no in
+        <foreach item="custNo" collection="array" open="(" separator="," close=")">
+            #{custNo}
+        </foreach>
+    </delete>
+
+
+
+</mapper>

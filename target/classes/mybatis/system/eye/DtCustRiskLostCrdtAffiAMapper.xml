@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtCustRiskLostCrdtAffiAMapper">
+	
+    <resultMap id="DtCustRiskLostCrdtAffiAResult" type="DtCustRiskLostCrdtAffiA">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="lostCrdtBeExecBehav" column="lost_crdt_be_exec_behav_"/>
+        <result property="caseNum" column="case_num"/>
+        <result property="party" column="party"/>
+        <result property="issueDt" column="issue_dt"/>
+        <result property="effectLawDocCfm" column="effect_law_doc_cfm"/>
+        <result property="execGistNum" column="exec_gist_num"/>
+        <result property="beExecFulfilSitu" column="be_exec_fulfil_situ"/>
+        <result property="etlDt" column="etl_dt"/>
+
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="selectDtCustRiskLostCrdtAffiA" parameterType="String" resultType="DtCustRiskLostCrdtAffiA" resultMap="DtCustRiskLostCrdtAffiAResult">
+        select * from DT_CUST_RISK_LOST_CRDT_AFFI_A
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

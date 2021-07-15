@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.WorkbenchMapper">
+	
+
+	
+	<select id="queryTaskInfoCount" resultType="Integer">
+        select count(1) from dc_ap_task_info
+    </select>
+
+	<select id="queryDisposalTrackCount" resultType="Integer">
+        select count(1) from dc_ap_disposal_track
+    </select>
+
+	<select id="queryRemoveRiskCount" resultType="Integer">
+        select count(1) from dc_ap_remOVE_RISK
+    </select>
+
+	<select id="querySignalManualCount" resultType="Integer">
+        select count(1) from DC_AP_SIGNAL_MANUAL
+    </select>
+
+	<select id="queryBlackManageFlowCount" resultType="Integer">
+        select count(1) from dc_ap_black_manage_flow
+    </select>
+
+	<select id="queryReassignTaskCount" resultType="Integer">
+        select count(1) from dc_ap_reassign_task
+    </select>
+	
+</mapper> 

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DpRmMonTaskOveMapper">
+	
+
+    <resultMap id="DpRmMonTaskOveResult" type="com.skyon.project.system.domain.eye.DpRmMonTaskOve">
+
+        <result property="orgCode" column="org_code"/>
+        <result property="analyTime" column="analy_time"/>
+        <result property="taskNum" column="task_num" />
+        <result property="taskOveNum" column="task_ove_num" />
+        <result property="cogTaskOveNum" column="cog_task_ove_num" />
+        <result property="cogTaskOveAveDay" column="cog_task_ove_ave_day" />
+        <result property="mgtTaskOveNum" column="mgt_task_ove_num" />
+        <result property="mgtTaskOveAveDay" column="mgt_task_ove_ave_day" />
+
+    </resultMap>
+	
+	<select id="selectDpRmMonTaskOve" parameterType="String"
+            resultType="DpRmMonTaskOve" resultMap="DpRmMonTaskOveResult">
+        select * from DP_RM_MON_TASK_OVE
+        where to_char(analy_time,'yyyy-MM') <![CDATA[<=#{date} ]]>
+    </select>
+
+
+
+
+</mapper>

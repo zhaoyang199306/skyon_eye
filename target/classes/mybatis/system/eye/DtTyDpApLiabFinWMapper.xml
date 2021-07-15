@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtTyDpApLiabFinWMapper">
+	
+
+    <resultMap id="DtTyDpApLiabFinWResult" type="DtTyDpApLiabFinW">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="reportPeriod" column="report_period"/>
+        <result property="acctCnt" column="acct_cnt"/>
+        <result property="crdtBal" column="crdt_bal"/>
+
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="selectDtTyDpApLiabFinW" parameterType="String" resultType="DtTyDpApLiabFinW"
+            resultMap="DtTyDpApLiabFinWResult">
+        select * from DT_TY_DP_AP_LIAB_FIN_W
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

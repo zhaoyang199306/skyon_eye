@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtCustRiskTagWMapper">
+	
+
+    <resultMap id="DtCustRiskTagWResult" type="DtCustRiskTagW">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+        <result property="riskTagName" column="risk_tag_name"/>
+        <result property="riskTagClass" column="risk_tag_class"/>
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="selectDtCustRiskTagW" parameterType="String" resultType="DtCustRiskTagW" resultMap="DtCustRiskTagWResult">
+        select * from DT_CUST_RISK_TAG_W
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

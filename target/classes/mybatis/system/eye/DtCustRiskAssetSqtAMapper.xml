@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtCustRiskAssetSqtAMapper">
+	
+
+    <resultMap id="DtCustRiskAssetSqtAResult" type="DtCustRiskAssetSqtA">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="caption" column="caption"/>
+        <result property="sqtStatus" column="sqt_status"/>
+        <result property="beSqtSubjMatterEstate" column="be_sqt_subj_matter_estate"/>
+        <result property="assetCate" column="asset_cate"/>
+        <result property="caseNum" column="case_num"/>
+        <result property="courtName" column="court_name"/>
+        <result property="dealDt" column="deal_dt"/>
+        <result property="contentOutline" column="content_outline"/>
+
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="selectDtCustRiskAssetSqtA" parameterType="String" resultType="DtCustRiskAssetSqtA" resultMap="DtCustRiskAssetSqtAResult">
+        select * from DT_CUST_RISK_ASSET_SQT_A
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

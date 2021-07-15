@@ -1,0 +1,6 @@
+
+usquid:S2293B"YReplace the type specification in this constructor call with the diamond operator ("<>").(±çÞöüÿÿÿÿ
+wsquid:UselessImportCheck"LRemove this unused import 'com.skyon.framework.aspectj.lang.annotation.Log'.(‹©ØÄ8ñï·÷©/
+usquid:S2293V"YReplace the type specification in this constructor call with the diamond operator ("<>").(±çÞöüÿÿÿÿ
+wsquid:S00120"ZRename this package name to match the regular expression '^[a-z_]+(\.[a-z_][a-z0-9_]*)*$'.(ÀëÐ›ÿÿÿÿÿ
+usquid:S2293K"YReplace the type specification in this constructor call with the diamond operator ("<>").(±çÞöüÿÿÿÿ

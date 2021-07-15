@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.Dp360LoanInfoMapper">
+	
+
+    <resultMap id="Dp360LoanInfoResult" type="Dp360LoanInfo">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+
+        <result property="correlation" column="correlation"/>
+        <result property="loanName" column="loan_name"/>
+        <result property="loanDate" column="loan_date"/>
+        <result property="dueDate" column="due_date"/>
+        <result property="loanRate" column="loan_rate"/>
+        <result property="loanAmount" column="loan_amount"/>
+        <result property="level5Class" column="level5_class"/>
+        <result property="orgName" column="org_name"/>
+        <result property="loanBal" column="loan_bal"/>
+        <result property="loanStauts" column="loan_stauts"/>
+        <result property="ifThisBank" column="if_this_bank"/>
+
+        <result property="etlDt" column="etl_dt"/>
+        <result property="etlTime" column="etl_time"/>
+    </resultMap>
+	
+	<select id="selectDp360LoanInfo" parameterType="String"
+            resultType="Dp360LoanInfo" resultMap="Dp360LoanInfoResult">
+        select * from DP_360_LOAN_INFO
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DpCustOutRatingMapper">
+	
+
+    <resultMap id="DpCustOutRatingResult" type="DpCustOutRating">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="annDt" column="ann_dt"/>
+        <result property="bInfoCreditrating" column="b_info_creditrating"/>
+        <result property="custOutRating" column="cust_out_rating"/>
+        <result property="bInfoCreditratingagency" column="b_info_creditratingagency"/>
+        <result property="rateAgency" column="rate_agency"/>
+
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="selectDpCustOutRating" parameterType="String" resultType="DpCustOutRating" resultMap="DpCustOutRatingResult">
+        select * from DP_CUST_OUT_RATING
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

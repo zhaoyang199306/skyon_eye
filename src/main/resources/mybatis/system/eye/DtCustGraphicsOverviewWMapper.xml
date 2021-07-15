@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtCustGraphicsOverviewWMapper">
+	
+
+    <resultMap id="DtCustGraphicsOverviewWResult" type="DtCustGraphicsOverviewW">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="cgbLonName" column="cgb_lon_name"/>
+        <result property="cgbLonAmt" column="cgb_lon_amt"/>
+        <result property="cgbLonBal" column="cgb_lon_bal"/>
+        <result property="cgbCrdtCardAmt" column="cgb_crdt_card_amt"/>
+        <result property="cgbCrdtCardBal" column="cgb_crdt_card_bal"/>
+        <result property="cgbFGuarAmt" column="cgb_f_guar_amt"/>
+        <result property="cgbFGuarBal" column="cgb_f_guar_bal"/>
+        <result property="obankLonName" column="obank_lon_name"/>
+        <result property="obankLonAmt" column="obank_lon_amt"/>
+        <result property="obankLonBal" column="obank_lon_bal"/>
+        <result property="obankCrdtCardAmt" column="obank_crdt_card_amt"/>
+        <result property="obankCrdtCardBal" column="obank_crdt_card_bal"/>
+        <result property="obankFGuarAmt" column="obank_f_guar_amt"/>
+        <result property="obankFGuarBal" column="obank_f_guar_bal"/>
+        <result property="incidRela" column="incid_rela"/>
+        <result property="relaPersonName" column="rela_person_name"/>
+
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="selectDtCustGraphicsOverviewW" parameterType="String"
+            resultType="DtCustGraphicsOverviewW" resultMap="DtCustGraphicsOverviewWResult">
+        select * from DT_CUST_GRAPHICS_OVERVIEW_W
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 

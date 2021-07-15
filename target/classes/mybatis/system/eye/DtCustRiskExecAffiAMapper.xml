@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DtCustRiskExecAffiAMapper">
+	
+
+    <resultMap id="DtCustRiskExecAffiAResult" type="DtCustRiskExecAffiA">
+        <result property="lpOrgNo" column="LP_ORG_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="custName" column="CUST_NAME"/>
+
+        <result property="caseNum" column="case_num"/>
+        <result property="execSubjMatter" column="exec_subj_matter"/>
+        <result property="caseStatus" column="case_status"/>
+        <result property="closingDt" column="closing_dt"/>
+        <result property="notExecAmt" column="not_exec_amt"/>
+        <result property="contentOutline" column="content_outline"/>
+        <result property="courtName" column="court_name"/>
+
+        <result property="etlTimestamp" column="ETL_TIMESTAMP"/>
+        <result property="partYmd" column="PART_YMD"/>
+        <result property="partYm" column="PART_YM"/>
+        <result property="monitorType" column="MONITOR_TYPE"/>
+    </resultMap>
+	
+	<select id="selectDtCustRiskExecAffiA" parameterType="String" resultType="DtCustRiskExecAffiA" resultMap="DtCustRiskExecAffiAResult">
+        select * from DT_CUST_RISK__EXEC_AFFI_A
+        where cust_no = #{custNo}
+    </select>
+
+
+
+
+</mapper> 
