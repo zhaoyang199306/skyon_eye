@@ -1,13 +1,0 @@
-
-[
-squid:S106p"9Replace this use of System.out or System.err by a logger.(©İ½Éüÿÿÿÿ8à§ÜŸª/
-V
-squid:S106m"9Replace this use of System.out or System.err by a logger.(äŞË€8³âÕŸª/
-V
-squid:S106n"9Replace this use of System.out or System.err by a logger.(“˜§Å8³âÕŸª/
-Esquid:S14815".Remove this unused "verifyKey" local variable.(ÛåÚ
-Bsquid:S11723"+Remove this unused method parameter "code".(Óš²Â
-V
-squid:S106o"9Replace this use of System.out or System.err by a logger.(ÙÈòò8³âÕŸª/
-nsquid:S2068f"Q'Pwd' detected in this expression, review this potentially hard-coded credential.(–éïY8•æ•£ª/
-Wsquid:S1193L"@Replace the usage of the "instanceof" operator by a catch block.(Ò†»¬
