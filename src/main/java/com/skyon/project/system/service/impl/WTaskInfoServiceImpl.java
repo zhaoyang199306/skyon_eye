@@ -73,5 +73,10 @@ public class WTaskInfoServiceImpl implements WTaskInfoService {
         return taskInfoMapper.selectAllTaskInfoNo();
     }
 
+    @Override
+    public Set selectIsProprietary() {
+        return taskInfoMapper.selectIsProprietary();
+    }
+
 
 }

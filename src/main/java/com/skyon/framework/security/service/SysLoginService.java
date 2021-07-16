@@ -87,10 +87,10 @@ public class SysLoginService
         AsyncManager.me().execute(AsyncFactory.recordLogininfor(username, Constants.LOGIN_SUCCESS, MessageUtils.message("user.login.success")));
         LoginUser loginUser = (LoginUser) authentication.getPrincipal();
 
-        // 单点登录实时智能魔方系统
-        if(loginUser.getUser().getUserName().equals("skyon")){
-            this.ssoLogin(loginUser);
-        }
+//        // 单点登录实时智能魔方系统
+//        if(loginUser.getUser().getUserName().equals("skyon")){
+//            this.ssoLogin(loginUser);
+//        }
 
 
         // 生成token

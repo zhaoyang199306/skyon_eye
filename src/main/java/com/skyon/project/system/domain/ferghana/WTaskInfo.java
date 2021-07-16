@@ -49,6 +49,9 @@ public class WTaskInfo extends BaseEntity {
 
     private String custManager; // 客户经理名字
 
+    private String isProprietary; // 非自营 0否 1是
+
+
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date riskTime; // 预警时间
 
@@ -61,6 +64,14 @@ public class WTaskInfo extends BaseEntity {
 
 
     private List<TBondInfo> bondInfoList; // 管理 债券信息类
+
+    public String getIsProprietary() {
+        return isProprietary;
+    }
+
+    public void setIsProprietary(String isProprietary) {
+        this.isProprietary = isProprietary;
+    }
 
     public Date getRiskTime() {
         return riskTime;

@@ -29,20 +29,22 @@ public class SsoFerghana {
 
     private Map commen() {
         Map map = new HashMap();
-        LoginUser loginUser = SecurityUtils.getLoginUser();
-        SysUser user = loginUser.getUser();
-        // 判断是否已经登录过
-        String alreadySSO = (String) redisCache.getCacheObject(user.getUserName() + "alreadySSO");
-        log.info("------------alreadySSO:[{}]", alreadySSO);
-        if (!"1".equals(alreadySSO)) {
-            Object fraudFerghana = redisCache.getCacheObject(user.getUserName() + "fraudToken");
-            log.info("------------token:[{}]", fraudFerghana);
-            map.put("token", fraudFerghana + "");
-        }
-        redisCache.setCacheObject(user.getUserName() + "alreadySSO", "1", 30, TimeUnit.MINUTES);
-        map.put("alreadySSO", alreadySSO);
+        // 先不用单点登录
 
-        map.put("userAccount", user.getUserName());
+//        LoginUser loginUser = SecurityUtils.getLoginUser();
+//        SysUser user = loginUser.getUser();
+//        // 判断是否已经登录过
+//        String alreadySSO = (String) redisCache.getCacheObject(user.getUserName() + "alreadySSO");
+//        log.info("------------alreadySSO:[{}]", alreadySSO);
+//        if (!"1".equals(alreadySSO)) {
+//            Object fraudFerghana = redisCache.getCacheObject(user.getUserName() + "fraudToken");
+//            log.info("------------token:[{}]", fraudFerghana);
+//            map.put("token", fraudFerghana + "");
+//        }
+//        redisCache.setCacheObject(user.getUserName() + "alreadySSO", "1", 30, TimeUnit.MINUTES);
+//        map.put("alreadySSO", alreadySSO);
+//
+//        map.put("userAccount", user.getUserName());
         return map;
     }
 
@@ -67,61 +69,60 @@ public class SsoFerghana {
         return AjaxResult.success(map);
     }
 
-//    // 数据维表
-//    @GetMapping("/source/dimension")
-//    public String dimension(Model model) {
-//        Map map = new HashMap();
-//        commen(model);
-//        model.addAttribute("redirect", "/source/dimension");
-//        return "manage";
-//    }
-//
-//    // 数据结果表
-//    @GetMapping("/source/result")
-//    public String result(Model model) {
-//        commen(model);
-//        model.addAttribute("redirect", "/source/result");
-//        return "manage";
-//    }
-//
-//    // 自定义函数
-//    @GetMapping("/variable/funcdevelop")
-//    public String funcdevelop(Model model) {
-//        commen(model);
-//        model.addAttribute("redirect", "/variable/funcdevelop");
-//        return "manage";
-//    }
-//
-//    // 变量分类
-//    @GetMapping("/variable/classification")
-//    public String classification(Model model) {
-//        commen(model);
-//        model.addAttribute("redirect", "/variable/classification");
-//        return "manage";
-//    }
-//
-//    // 变量管理
-//    @GetMapping("/variable/manager")
-//    public String variableManager(Model model) {
-//        commen(model);
-//        model.addAttribute("redirect", "/variable/manager");
-//        return "manage";
-//    }
-//
-//    // 变量包管理
-//    @GetMapping("/variable/package-manager")
-//    public String variablePackage(Model model) {
-//        commen(model);
-//        model.addAttribute("redirect", "/variable/package-manager");
-//        return "manage";
-//    }
-//
-//    // 运行中作业
-//    @GetMapping("/operation/runingjob")
-//    public String runingjob(Model model) {
-//        commen(model);
-//        model.addAttribute("redirect", "/operation/runingjob");
-//        return "manage";
-//    }
+    // 数据维表
+    @GetMapping("/source/dimension")
+    public AjaxResult dimension() {
+        Map map = this.commen();
+        map.put("redirect", "/source/dimension");
+        return AjaxResult.success(map);
+    }
+
+    // 数据结果表
+    @GetMapping("/source/result")
+    public AjaxResult result() {
+        Map map = this.commen();
+        map.put("redirect", "/source/result");
+        return AjaxResult.success(map);
+    }
+
+    // 自定义函数
+    @GetMapping("/variable/funcdevelop")
+    public AjaxResult funcdevelop() {
+        Map map = this.commen();
+        map.put("redirect", "/variable/funcdevelop");
+        return AjaxResult.success(map);
+    }
+
+    // 变量分类
+    @GetMapping("/variable/classification")
+    public AjaxResult classification() {
+        Map map = this.commen();
+        map.put("redirect", "/variable/classification");
+        return AjaxResult.success(map);
+    }
+
+    // 变量管理
+    @GetMapping("/variable/manager")
+    public AjaxResult variableManager() {
+        Map map = this.commen();
+        map.put("redirect", "/variable/manager");
+        return AjaxResult.success(map);
+    }
+
+    // 变量包管理
+    @GetMapping("/variable/package-manager")
+    public AjaxResult variablePackage() {
+        Map map = this.commen();
+        map.put("redirect", "/variable/package-manager");
+        return AjaxResult.success(map);
+    }
+
+    // 运行中作业
+    @GetMapping("/operation/runingjob")
+    public AjaxResult runingjob() {
+        Map map = this.commen();
+        map.put("redirect", "/operation/runingjob");
+        return AjaxResult.success(map);
+    }
 }
 

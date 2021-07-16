@@ -31,6 +31,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="scoreLevel" column="SCORE_LEVEL"/>
         <result property="signalSource" column="SIGNAL_SOURCE"/>
 
+        <result property="isProprietary" column="is_Proprietary"/>
+
     </resultMap>
 
     <resultMap id="WTaskInfoResult" type="WTaskInfo">
@@ -52,6 +54,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="riskLevel" column="risk_Level"/>
         <result property="isManualInput" column="is_Manual_Input"/>
         <result property="custManager" column="cust_Manager"/>
+        <result property="isProprietary" column="is_Proprietary"/>
         <collection property="bondInfoList" ofType="com.skyon.project.system.domain.eye.TBondInfo">
             <id property="bondInfoID" column="bond_info_ID"/>
             <result property="taskInfoNo" column="task_Info_No"/>
@@ -89,7 +92,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="getWTaskInfoListByRole" resultType="WTaskInfo" resultMap="WTaskInfoResult">
-        select * from w_task_info where role = #{role} and run_status = '01'
+        select * from w_task_info where role = #{role} and run_status = '01' and is_Proprietary != '1'
     </select>
 
     <select id="selectWTaskInfoByCustNo" resultType="WTaskInfo" resultMap="WTaskInfoResultAlone">
@@ -109,6 +112,11 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         select * from w_task_info t
         left join t_bond_info s on t.task_info_no = s.task_info_no
         where t.is_manual_input='1' and t.cust_no = #{custNO}
+    </select>
+
+    <select id="selectIsProprietary" resultType="String">
+        select TASK_INFO_NO from w_task_info t
+        where run_status = '01' and is_Proprietary = '1'
     </select>
 
     <update id="updateRunStatusByNo" parameterType="String">

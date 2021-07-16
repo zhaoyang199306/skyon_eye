@@ -93,8 +93,13 @@ public class WorkbenchController extends BaseController {
                 }
             }
         }
+
+        // 处置跟踪的初始的非自营  单独计算
+        Set proprietarys = taskInfoService.selectIsProprietary();
+
+
         mapSelf.put("taskInfoSelfCount", taskInfoSelfCountNum); // 预警认定
-        mapSelf.put("disposalTrackSelfCount", disposalTrackSelfCountNum); // 处置跟踪
+        mapSelf.put("disposalTrackSelfCount", disposalTrackSelfCountNum+proprietarys.size()); // 处置跟踪
         mapSelf.put("removeRiskSelfCount", removeRiskSelfCountNum); // 预警解除
         mapSelf.put("signalManualSelfCount", 2);
         mapSelf.put("manageFlowSelfCount", 1);

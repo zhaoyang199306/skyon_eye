@@ -33,4 +33,6 @@ public interface WTaskInfoMapper {
 
     // 查询所有的task_info_no
     public List selectAllTaskInfoNo();
+    // 查询处置跟踪的非自营
+    public Set selectIsProprietary();
 }

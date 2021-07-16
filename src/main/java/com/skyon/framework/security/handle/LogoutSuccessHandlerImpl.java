@@ -46,8 +46,8 @@ public class LogoutSuccessHandlerImpl implements LogoutSuccessHandler
             // 删除用户缓存记录
             tokenService.delLoginUser(loginUser.getToken());
 
-            //
-            tokenService.delSsoLoginUser(loginUser);
+            //  删除单点登录redis
+//            tokenService.delSsoLoginUser(loginUser);
 
             // 记录用户退出日志
             AsyncManager.me().execute(AsyncFactory.recordLogininfor(userName, Constants.LOGOUT, "退出成功"));

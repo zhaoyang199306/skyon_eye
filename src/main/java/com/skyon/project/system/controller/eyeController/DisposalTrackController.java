@@ -146,8 +146,14 @@ public class DisposalTrackController extends BaseController {
             }
         }
 
+        // 非自营的
+        Set proprietarys = taskInfoService.selectIsProprietary();
+        set.addAll(proprietarys);
         // 查询待办箱
         if (set.size() > 0) list = taskInfoService.getWTaskInfoByList1(set);
+
+
+
 
         return AjaxResult.success(list);
     }
