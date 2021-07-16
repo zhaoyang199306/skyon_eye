@@ -1,10 +1,0 @@
-
-?squid:S1148A"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-Qsquid:S1905(":Remove this unnecessary cast to "ResourcePatternResolver".(ºİÎ½
-Qsquid:S1141;"5Extract this nested try block into a separate method.(ç£êúÿÿÿÿ
-psquid:S2293H"YReplace the type specification in this constructor call with the diamond operator ("<>").(ïµ¼û
-usquid:S2293*"YReplace the type specification in this constructor call with the diamond operator ("<>").(Èûÿÿÿÿÿÿ
-psquid:S2293/"YReplace the type specification in this constructor call with the diamond operator ("<>").(Ä„ƒ
-?squid:S1148W"#Use a logger to log this exception.(€ÉÔ…ıÿÿÿÿ
-osquid:S3305""XInject this field value directly into "sqlSessionFactory", the only method that uses it.(«ª“ø
-isquid:S3776&"RRefactor this method to reduce its Cognitive Complexity from 21 to the 15 allowed.(™”»
