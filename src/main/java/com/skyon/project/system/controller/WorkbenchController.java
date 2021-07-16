@@ -84,11 +84,11 @@ public class WorkbenchController extends BaseController {
 
 
             if (list.contains(key)) {
-                if (WFLink.WFLINK1.contains(value)){
+                if (WFLink.WFLINK1.contains(value)) {
                     taskInfoSelfCountNum++;
-                } else if (WFLink.WFLINK2.contains(value)){
+                } else if (WFLink.WFLINK2.contains(value)) {
                     disposalTrackSelfCountNum++;
-                }  else if (WFLink.WFLINK3.contains(value)){
+                } else if (WFLink.WFLINK3.contains(value)) {
                     removeRiskSelfCountNum++;
                 }
             }
@@ -99,7 +99,7 @@ public class WorkbenchController extends BaseController {
 
 
         mapSelf.put("taskInfoSelfCount", taskInfoSelfCountNum); // 预警认定
-        mapSelf.put("disposalTrackSelfCount", disposalTrackSelfCountNum+proprietarys.size()); // 处置跟踪
+        mapSelf.put("disposalTrackSelfCount", disposalTrackSelfCountNum + proprietarys.size()); // 处置跟踪
         mapSelf.put("removeRiskSelfCount", removeRiskSelfCountNum); // 预警解除
         mapSelf.put("signalManualSelfCount", 2);
         mapSelf.put("manageFlowSelfCount", 1);

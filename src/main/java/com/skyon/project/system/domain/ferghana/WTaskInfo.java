@@ -51,6 +51,10 @@ public class WTaskInfo extends BaseEntity {
 
     private String isProprietary; // 非自营 0否 1是
 
+    private String channel; // 渠道
+
+    private String riskCustNum; // 风险客户编号
+
 
     @JsonFormat(pattern = "yyyy-MM-dd")
     private Date riskTime; // 预警时间
@@ -64,6 +68,22 @@ public class WTaskInfo extends BaseEntity {
 
 
     private List<TBondInfo> bondInfoList; // 管理 债券信息类
+
+    public String getChannel() {
+        return channel;
+    }
+
+    public void setChannel(String channel) {
+        this.channel = channel;
+    }
+
+    public String getRiskCustNum() {
+        return riskCustNum;
+    }
+
+    public void setRiskCustNum(String riskCustNum) {
+        this.riskCustNum = riskCustNum;
+    }
 
     public String getIsProprietary() {
         return isProprietary;
