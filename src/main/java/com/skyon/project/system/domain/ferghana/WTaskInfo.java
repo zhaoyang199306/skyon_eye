@@ -63,11 +63,39 @@ public class WTaskInfo extends BaseEntity {
     private String ruleLevel; // 规则等级
     private String scoreLevel; // 评分等级
     private String signalSource; // 信号来源
+    private String cardNum; // 证件号
+    private String custTel; // 客户手机号
+    private String riskComfType; // 风险认定方式
+
 
 
 
 
     private List<TBondInfo> bondInfoList; // 管理 债券信息类
+
+    public String getCardNum() {
+        return cardNum;
+    }
+
+    public void setCardNum(String cardNum) {
+        this.cardNum = cardNum;
+    }
+
+    public String getCustTel() {
+        return custTel;
+    }
+
+    public void setCustTel(String custTel) {
+        this.custTel = custTel;
+    }
+
+    public String getRiskComfType() {
+        return riskComfType;
+    }
+
+    public void setRiskComfType(String riskComfType) {
+        this.riskComfType = riskComfType;
+    }
 
     public String getChannel() {
         return channel;

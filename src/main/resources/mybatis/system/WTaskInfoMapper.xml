@@ -31,6 +31,10 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="scoreLevel" column="SCORE_LEVEL"/>
         <result property="signalSource" column="SIGNAL_SOURCE"/>
 
+        <result property="cardNum" column="CARD_NUM" />
+        <result property="custTel" column="CUST_TEL" />
+        <result property="riskComfType" column="RISK_COMF_TYPE" />
+
         <result property="isProprietary" column="is_Proprietary"/>
 
     </resultMap>
