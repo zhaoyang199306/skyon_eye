@@ -59,6 +59,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="isManualInput" column="is_Manual_Input"/>
         <result property="custManager" column="cust_Manager"/>
         <result property="isProprietary" column="is_Proprietary"/>
+        <result property="cardNum" column="CARD_NUM" />
+        <result property="custTel" column="CUST_TEL" />
+        <result property="riskComfType" column="RISK_COMF_TYPE" />
         <collection property="bondInfoList" ofType="com.skyon.project.system.domain.eye.TBondInfo">
             <id property="bondInfoID" column="bond_info_ID"/>
             <result property="taskInfoNo" column="task_Info_No"/>

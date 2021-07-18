@@ -3,6 +3,7 @@ package com.skyon.project.system.domain.ferghana;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.skyon.framework.web.domain.BaseEntity;
 import com.skyon.project.system.domain.eye.TBondInfo;
+import com.skyon.project.system.domain.eye.TWarnSignal;
 
 import java.util.Date;
 import java.util.List;
@@ -72,6 +73,16 @@ public class WTaskInfo extends BaseEntity {
 
 
     private List<TBondInfo> bondInfoList; // 管理 债券信息类
+
+    private List<TWarnSignal> warnSignals; // 预警信号列表
+
+    public List<TWarnSignal> getWarnSignals() {
+        return warnSignals;
+    }
+
+    public void setWarnSignals(List<TWarnSignal> warnSignals) {
+        this.warnSignals = warnSignals;
+    }
 
     public String getCardNum() {
         return cardNum;

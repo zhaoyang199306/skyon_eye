@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.TWarnSignalMapper">
+	
+
+    <resultMap id="TWarnSignalResult" type="com.skyon.project.system.domain.eye.TWarnSignal">
+
+        <result property="taskInfoNo" column="task_info_no"/>
+        <result property="taskNum" column="task_num"/>
+        <result property="nowDealRole" column="now_deal_role"/>
+        <result property="singleName" column="single_name"/>
+        <result property="singleLevel" column="single_level"/>
+        <result property="warmResson" column="warm_resson"/>
+        <result property="touchDate" column="touch_date"/>
+        <result property="devolutionDate" column="devolution_date"/>
+
+    </resultMap>
+	
+	<select id="selectTWarnSignal" parameterType="String"
+            resultType="TWarnSignal" resultMap="TWarnSignalResult">
+        select * from Warn_Signal
+        where task_info_no = #{taskInfoNo}
+    </select>
+
+
+
+
+</mapper> 

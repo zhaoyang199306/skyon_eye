@@ -11,8 +11,10 @@ import com.skyon.framework.web.controller.BaseController;
 import com.skyon.framework.web.domain.AjaxResult;
 import com.skyon.project.system.domain.SysRole;
 import com.skyon.project.system.domain.SysUser;
+import com.skyon.project.system.domain.eye.TWarnSignal;
 import com.skyon.project.system.domain.ferghana.WTaskInfo;
 import com.skyon.project.system.service.SignalManualSevice;
+import com.skyon.project.system.service.TWarnSignalService;
 import com.skyon.project.system.service.WLinkLogService;
 import com.skyon.project.system.service.WTaskInfoService;
 import com.skyon.project.system.service.activiti.RunWFService;
@@ -42,6 +44,8 @@ public class TaskInfoController extends BaseController {
 
     @Autowired
     private WTaskInfoService taskInfoService;
+    @Autowired
+    private TWarnSignalService warnSignalService;
 
     @GetMapping("/list")
     @Transactional
@@ -70,7 +74,7 @@ public class TaskInfoController extends BaseController {
 
                 if (listAll.contains(key)) {
 
-                    if(WFLink.WFLINK1.contains(value))
+                    if (WFLink.WFLINK1.contains(value))
                         set.add(key);
                 }
             }
@@ -176,41 +180,12 @@ public class TaskInfoController extends BaseController {
 
     @GetMapping("/getDetail/{taskInfoNo}")
     public AjaxResult getSignalManualDetail(@PathVariable("taskInfoNo") String taskInfoNo) {
-        List list = new ArrayList();
-        Map map = new HashMap();
-        map.put("q", "RD20210301001");
-        map.put("w", "预警认定员");
-        map.put("e", "长期拖欠");
-        map.put("r", "三级预警");
-        map.put("t", "客户自2018年来，拖欠银行2万元整");
-        map.put("y", "2021-01-09");
-        map.put("u", "");
-        map.put("i", "01");
-        list.add(map);
 
-        Map map2 = new HashMap();
-        map2.put("q", "RD20210301002");
-        map2.put("w", "预警认定员");
-        map2.put("e", "丧失还款能力");
-        map2.put("r", "二级预警");
-        map2.put("t", "客户长期无银行流水，无社保证明，无公积金证明，已无还款能力");
-        map2.put("y", "2021-01-09");
-        map2.put("u", "");
-        map2.put("i", "02");
-        list.add(map2);
+        WTaskInfo taskInfo = new WTaskInfo();
 
-        Map map3 = new HashMap();
-        map2.put("q", "RD20210301003");
-        map2.put("w", "预警认定员");
-        map2.put("e", "法院-失信");
-        map2.put("r", "二级预警");
-        map2.put("t", "客户已被长沙市中级人民法院认定为失信人员");
-        map2.put("y", "2021-01-09");
-        map2.put("u", "");
-        map2.put("i", "01");
-        list.add(map2);
-
-        return AjaxResult.success(list);
+        List<TWarnSignal> tWarnSignals = warnSignalService.selectTWarnSignal(taskInfoNo);
+        taskInfo.setWarnSignals(tWarnSignals.size() > 0 ? tWarnSignals : null);
+        return AjaxResult.success(taskInfo);
     }
 
 
