@@ -53,6 +53,7 @@ spring:
   messages:
     # 国际化资源文件路径
     basename: i18n/messages
+# 附加文件的选用
   profiles: 
     active: dev
   # 文件上传

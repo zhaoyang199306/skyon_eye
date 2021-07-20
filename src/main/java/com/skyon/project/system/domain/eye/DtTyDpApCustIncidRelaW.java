@@ -11,6 +11,15 @@ public class DtTyDpApCustIncidRelaW extends EyeBaseEntity {
     private String incidRela; // 关联关系
     private String relaParty; // 关联方
     private String relaType; // 关系类型
+    private String riskFlag; // 风险提示标志
+
+    public String getRiskFlag() {
+        return riskFlag;
+    }
+
+    public void setRiskFlag(String riskFlag) {
+        this.riskFlag = riskFlag;
+    }
 
     public String getIncidRela() {
         return incidRela;
