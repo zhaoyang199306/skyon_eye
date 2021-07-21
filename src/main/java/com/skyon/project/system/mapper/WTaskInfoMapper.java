@@ -16,7 +16,9 @@ public interface WTaskInfoMapper {
     public List<WTaskInfo> getWTaskInfoListByRole(String role);
 
     // 根据taskInfoNo 修改run_status状态与风险管控措施值
-    public int updateRunStatusByNo(String taskInfoNo, String riskValue);
+    public int updateRunStatusByNo(String taskInfoNo, String riskValue,String personalRiskLevel,String checkResult);
+
+    public int updateRunStatusByNoAndTrack(String taskInfoNo);
 
     // 初始化run_status状态
     public int celarRunStatusByNo(String taskInfoNo);
@@ -35,4 +37,5 @@ public interface WTaskInfoMapper {
     public List selectAllTaskInfoNo();
     // 查询处置跟踪的非自营
     public Set selectIsProprietary();
+    public Set selectIsNoProprietary();
 }

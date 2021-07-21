@@ -37,6 +37,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="custTel" column="CUST_TEL" />
         <result property="riskComfType" column="RISK_COMF_TYPE" />
         <result property="riskValue" column="risk_value" />
+        <result property="personalRiskLevel" column="PERSONAL_RISK_LEVEL" />
+        <result property="checkResult" column="CHECK_RESULT" />
 
         <result property="isProprietary" column="is_Proprietary"/>
 
@@ -68,6 +70,8 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="custTel" column="CUST_TEL" />
         <result property="riskComfType" column="RISK_COMF_TYPE" />
         <result property="riskValue" column="risk_value" />
+        <result property="personalRiskLevel" column="PERSONAL_RISK_LEVEL" />
+        <result property="checkResult" column="CHECK_RESULT" />
         <collection property="bondInfoList" ofType="com.skyon.project.system.domain.eye.TBondInfo">
             <id property="bondInfoID" column="bond_info_ID"/>
             <result property="taskInfoNo" column="task_Info_No"/>
@@ -105,7 +109,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <select id="getWTaskInfoListByRole" resultType="WTaskInfo" resultMap="WTaskInfoResult">
-        select * from w_task_info where role = #{role} and run_status = '01' and is_Proprietary != '1'
+        select * from w_task_info where role = #{role} and run_status = '01' and is_Proprietary = '0'
     </select>
 
     <select id="selectWTaskInfoByCustNo" resultType="WTaskInfo" resultMap="WTaskInfoResultAlone">
@@ -132,8 +136,22 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         where run_status = '01' and is_Proprietary = '1'
     </select>
 
+    <select id="selectIsNoProprietary" resultType="String">
+        select TASK_INFO_NO from w_task_info t
+        where run_status = '01' and is_Proprietary = '2'
+    </select>
+
     <update id="updateRunStatusByNo" parameterType="String">
-        update w_task_info set run_status = '02',risk_value=#{riskValue} where TASK_INFO_NO = #{taskInfoNo}
+        update w_task_info set
+        <if test="riskValue != null || riskValue != ''">risk_value=#{riskValue},</if>
+        <if test="personalRiskLevel != null">PERSONAL_RISK_LEVEL=#{personalRiskLevel},</if>
+        <if test="checkResult != null">CHECK_RESULT=#{checkResult},</if>
+        run_status = '02'
+         where TASK_INFO_NO = #{taskInfoNo}
+    </update>
+
+    <update id="updateRunStatusByNoAndTrack" parameterType="String">
+        update w_task_info set run_status = '02' where TASK_INFO_NO = #{taskInfoNo}
     </update>
 
     <update id="celarRunStatusByNo" parameterType="String">

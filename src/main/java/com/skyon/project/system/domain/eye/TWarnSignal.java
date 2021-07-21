@@ -9,6 +9,9 @@ import java.util.Date;
  * warn_signal
  */
 public class TWarnSignal {
+    public TWarnSignal() {
+    }
+
     private String taskInfoNo;
     private String taskNum;
     private String nowDealRole;
@@ -17,7 +20,15 @@ public class TWarnSignal {
     private String warmResson;
     private String touchDate;
     private String devolutionDate;
+    private String comfStatus;
 
+    public String getComfStatus() {
+        return comfStatus;
+    }
+
+    public void setComfStatus(String comfStatus) {
+        this.comfStatus = comfStatus;
+    }
 
     public String getTaskNum() {
         return taskNum;

@@ -18,4 +18,9 @@ public class TWarnSignalServiceImpl implements TWarnSignalService {
     public List<TWarnSignal> selectTWarnSignal(String taskInfoNo) {
         return tWarnSignalMapper.selectTWarnSignal(taskInfoNo);
     }
+
+    @Override
+    public int updateTWarnSignal(List<TWarnSignal> tWarnSignals) {
+        return tWarnSignalMapper.updateTWarnSignal(tWarnSignals);
+    }
 }

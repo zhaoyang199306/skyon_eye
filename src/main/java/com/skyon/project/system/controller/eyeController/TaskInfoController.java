@@ -12,6 +12,7 @@ import com.skyon.framework.web.domain.AjaxResult;
 import com.skyon.project.system.domain.SysRole;
 import com.skyon.project.system.domain.SysUser;
 import com.skyon.project.system.domain.eye.TWarnSignal;
+import com.skyon.project.system.domain.eye.TaskInfoSubmitPojo;
 import com.skyon.project.system.domain.ferghana.WTaskInfo;
 import com.skyon.project.system.service.SignalManualSevice;
 import com.skyon.project.system.service.TWarnSignalService;
@@ -91,13 +92,27 @@ public class TaskInfoController extends BaseController {
      * 预警认定-- 反馈和审批提交入口
      *
      * @return AjaxResult
+     * @RequestParam("taskInfoNo") String taskInfoNo,
+     * @RequestParam("riskValue") String riskValue,
+     * @RequestParam("radio") Object radio,
+     * @RequestParam("examinValue") String examinValue,
+     * @RequestParam("personalRiskLevel") String personalRiskLevel,
+     * @RequestParam("checkResult") String checkResult,
+     * TWarnSignal warnSignalList
      */
-    @GetMapping("/submitTask")
+
+    @PostMapping("/submitTask")
     @Transactional
-    public AjaxResult submitTask(@RequestParam("taskInfoNo") String taskInfoNo,
-                                 @RequestParam("riskValue") String riskValue,
-                                 @RequestParam("radio") Object radio,
-                                 @RequestParam("examinValue") String examinValue) {
+    public AjaxResult submitTask(@RequestBody TaskInfoSubmitPojo pojo) {
+
+        List<TWarnSignal> warnSignalList = pojo.getWarnSignalList();
+        String checkResult = pojo.getCheckResult();
+        String examinValue = pojo.getExaminValue();
+        String personalRiskLevel = pojo.getPersonalRiskLevel();
+        String riskValue = pojo.getRiskValue();
+        String taskInfoNo = pojo.getTaskInfoNo();
+        Object radio = pojo.getRadio();
+
 
         logger.info("----submitTask----: 任务编号：{}，审核意见：{}", taskInfoNo, examinValue);
 
@@ -111,6 +126,7 @@ public class TaskInfoController extends BaseController {
         if (RoleName.ACCOUNT_MANAGER.getInfo().equals(roles.get(0).getRoleName())) {
             map.put(WFRole.WFROLE101.getCode(), user.getUserId()); // 预警认定操作人id
             map.put(WFRole.WFROLE102.getCode(), "7"); // 下一环节的人员组
+            map.put("wf", "1"); // wf 走流程1
             // 某个任务，启动流程
             runWFService.startWf(taskInfoNo, map);
             // 执行任务
@@ -119,7 +135,10 @@ public class TaskInfoController extends BaseController {
             logger.info("----taskName----: {}", taskName);
             // 执行成功后 修改w_task_info 表里的状态 run_status
             if (WFLink.WFLINK101.getInfo().equals(taskName)) {
-                i = taskInfoService.updateRunStatusByNo(taskInfoNo,riskValue);
+                i = taskInfoService.updateRunStatusByNo(taskInfoNo, riskValue, personalRiskLevel, checkResult);
+                // 修改预警信号列表 的 认定状态
+                if (warnSignalList != null && warnSignalList.size() > 0)
+                    warnSignalService.updateTWarnSignal(warnSignalList);
             }
             // insert环节流转
             linkLogService.insertWLinkLog(taskInfoNo, "RD", WFLink.WFLINK101.getInfo(), user.getUserName(),

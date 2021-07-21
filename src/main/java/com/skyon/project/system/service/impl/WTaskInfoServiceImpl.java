@@ -46,8 +46,13 @@ public class WTaskInfoServiceImpl implements WTaskInfoService {
     }
 
     @Override
-    public int updateRunStatusByNo(String taskInfoNo, String riskValue) {
-        return taskInfoMapper.updateRunStatusByNo(taskInfoNo, riskValue);
+    public int updateRunStatusByNo(String taskInfoNo, String riskValue, String personalRiskLevel, String checkResult) {
+        return taskInfoMapper.updateRunStatusByNo(taskInfoNo, riskValue, personalRiskLevel, checkResult);
+    }
+
+    @Override
+    public int updateRunStatusByNoAndTrack(String taskInfoNo) {
+        return taskInfoMapper.updateRunStatusByNoAndTrack(taskInfoNo);
     }
 
     @Override
@@ -76,6 +81,11 @@ public class WTaskInfoServiceImpl implements WTaskInfoService {
     @Override
     public Set selectIsProprietary() {
         return taskInfoMapper.selectIsProprietary();
+    }
+
+    @Override
+    public Set selectIsNoProprietary() {
+        return taskInfoMapper.selectIsNoProprietary();
     }
 
 

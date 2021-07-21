@@ -3,7 +3,7 @@
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.skyon.project.system.mapper.eye.TWarnSignalMapper">
-	
+
 
     <resultMap id="TWarnSignalResult" type="com.skyon.project.system.domain.eye.TWarnSignal">
 
@@ -14,17 +14,29 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="singleLevel" column="single_level"/>
         <result property="warmResson" column="warm_resson"/>
         <result property="touchDate" column="touch_date"/>
+        <result property="comfStatus" column="comf_status"/>
         <result property="devolutionDate" column="devolution_date"/>
 
     </resultMap>
-	
+
 	<select id="selectTWarnSignal" parameterType="String"
             resultType="TWarnSignal" resultMap="TWarnSignalResult">
         select * from Warn_Signal
         where task_info_no = #{taskInfoNo}
     </select>
 
+    <update id="updateTWarnSignal" parameterType="com.skyon.project.system.domain.eye.TWarnSignal">
+        <foreach collection="collection" separator=";" item="item">
+
+                update Warn_Signal set
+                comf_status = #{item.comfStatus}
+                where task_info_no = #{item.taskInfoNo} and task_num = #{item.taskNum}
+
+        </foreach>
+
+    </update>
 
 
 
-</mapper> 
+
+</mapper>

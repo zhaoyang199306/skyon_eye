@@ -13,4 +13,6 @@ import java.util.List;
 public interface TWarnSignalService
 {
     public List<TWarnSignal> selectTWarnSignal(String taskInfoNo);
+
+    public int updateTWarnSignal(List<TWarnSignal> tWarnSignals);
 }

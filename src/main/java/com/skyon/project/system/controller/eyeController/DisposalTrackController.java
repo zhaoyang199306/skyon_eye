@@ -13,6 +13,7 @@ import com.skyon.project.system.domain.SysRole;
 import com.skyon.project.system.domain.SysUser;
 import com.skyon.project.system.service.WLinkLogService;
 import com.skyon.project.system.service.WTaskInfoService;
+import com.skyon.project.system.service.activiti.RunWFService;
 import com.skyon.project.system.service.activiti.TaskWFService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,6 +35,10 @@ public class DisposalTrackController extends BaseController {
     private WTaskInfoService taskInfoService;
     @Autowired
     private WLinkLogService linkLogService;
+    @Autowired
+    private RunWFService runWFService;
+    @Autowired
+    private WTaskInfoService wTaskInfoService;
 
     /**
      * 预警认定-- 反馈和审批提交入口
@@ -64,6 +69,20 @@ public class DisposalTrackController extends BaseController {
             if (WFLink.WFLINK201.getInfo().equals(taskName)){
                 linkLogService.insertWLinkLog(taskInfoNo, DealType.GZ.getCode(), WFLink.WFLINK201.getInfo(), user.getUserName(),
                         SUBMIT_BUTTON, "", examinValue);
+            } else if ("".equals(taskName)){
+                map.put("wf", "2"); // wf 走流程2
+                map.put(WFRole.WFROLE201.getCode(), "6"); // 客户经理处置跟踪 组
+                // 某个任务，启动流程
+                runWFService.startWf(taskInfoNo, map);
+                // 执行任务
+                taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+
+                if (WFLink.WFLINK201.getInfo().equals(taskName)){
+                    linkLogService.insertWLinkLog(taskInfoNo, DealType.GZ.getCode(), WFLink.WFLINK201.getInfo(), user.getUserName(),
+                            SUBMIT_BUTTON, "", examinValue);
+                    wTaskInfoService.updateRunStatusByNoAndTrack(taskInfoNo);
+                }
+
             }
 
         } else if (RoleName.RETAIL_DEPARTMENT_AUDIT.getInfo().equals(roles.get(0).getRoleName())) {
@@ -148,7 +167,10 @@ public class DisposalTrackController extends BaseController {
 
         // 非自营的
         Set proprietarys = taskInfoService.selectIsProprietary();
+        // 自营的
+        Set noProprietary = taskInfoService.selectIsNoProprietary();
         set.addAll(proprietarys);
+        set.addAll(noProprietary);
         // 查询待办箱
         if (set.size() > 0) list = taskInfoService.getWTaskInfoByList1(set);
 

@@ -6,4 +6,6 @@ import java.util.List;
 
 public interface TWarnSignalMapper {
     public List<TWarnSignal> selectTWarnSignal(String taskInfoNo);
+
+    public int updateTWarnSignal(List<TWarnSignal> tWarnSignals);
 }

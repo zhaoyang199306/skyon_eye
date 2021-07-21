@@ -15,7 +15,9 @@ public interface WTaskInfoService {
     public List<WTaskInfo> getWTaskInfoListByRole(String role);
 
     // 根据taskInfoNo 修改run_status状态
-    public int updateRunStatusByNo(String taskInfoNo,String riskValue);
+    public int updateRunStatusByNo(String taskInfoNo,String riskValue,String personalRiskLevel,String checkResult);
+
+    public int updateRunStatusByNoAndTrack(String taskInfoNo);
 
     public int celarRunStatusByNo(String taskInfoNo);
 
@@ -26,4 +28,6 @@ public interface WTaskInfoService {
 
     // 查询处置跟踪的非自营
     public Set selectIsProprietary();
+
+    public Set selectIsNoProprietary();
 }

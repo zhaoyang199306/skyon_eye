@@ -68,6 +68,8 @@ public class WTaskInfo extends BaseEntity {
     private String custTel; // 客户手机号
     private String riskComfType; // 风险认定方式
     private String riskValue; // 风险认定方式
+    private String personalRiskLevel; // 个人认定风险等级
+    private String checkResult; // 检查结论
 
 
 
@@ -76,6 +78,22 @@ public class WTaskInfo extends BaseEntity {
     private List<TBondInfo> bondInfoList; // 管理 债券信息类
 
     private List<TWarnSignal> warnSignals; // 预警信号列表
+
+    public String getPersonalRiskLevel() {
+        return personalRiskLevel;
+    }
+
+    public void setPersonalRiskLevel(String personalRiskLevel) {
+        this.personalRiskLevel = personalRiskLevel;
+    }
+
+    public String getCheckResult() {
+        return checkResult;
+    }
+
+    public void setCheckResult(String checkResult) {
+        this.checkResult = checkResult;
+    }
 
     public String getRiskValue() {
         return riskValue;
