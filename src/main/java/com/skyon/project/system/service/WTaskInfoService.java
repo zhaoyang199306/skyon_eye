@@ -15,7 +15,7 @@ public interface WTaskInfoService {
     public List<WTaskInfo> getWTaskInfoListByRole(String role);
 
     // 根据taskInfoNo 修改run_status状态
-    public int updateRunStatusByNo(String taskInfoNo);
+    public int updateRunStatusByNo(String taskInfoNo,String riskValue);
 
     public int celarRunStatusByNo(String taskInfoNo);
 

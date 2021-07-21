@@ -67,6 +67,7 @@ public class WTaskInfo extends BaseEntity {
     private String cardNum; // 证件号
     private String custTel; // 客户手机号
     private String riskComfType; // 风险认定方式
+    private String riskValue; // 风险认定方式
 
 
 
@@ -75,6 +76,14 @@ public class WTaskInfo extends BaseEntity {
     private List<TBondInfo> bondInfoList; // 管理 债券信息类
 
     private List<TWarnSignal> warnSignals; // 预警信号列表
+
+    public String getRiskValue() {
+        return riskValue;
+    }
+
+    public void setRiskValue(String riskValue) {
+        this.riskValue = riskValue;
+    }
 
     public List<TWarnSignal> getWarnSignals() {
         return warnSignals;

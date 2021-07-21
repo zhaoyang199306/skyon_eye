@@ -5,7 +5,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 <mapper namespace="com.skyon.project.system.mapper.WTaskInfoMapper">
 
 
-    <resultMap id="WTaskInfoResultAlone" type="WTaskInfo">
+    <resultMap id="WTaskInfoResultAlone" type="com.skyon.project.system.domain.ferghana.WTaskInfo">
         <id property="taskInfoNo" column="TASK_INFO_NO"/>
         <result property="custNo" column="CUST_NO"/>
         <result property="custName" column="CUST_NAME"/>
@@ -30,10 +30,13 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="ruleLevel" column="RULE_LEVEL"/>
         <result property="scoreLevel" column="SCORE_LEVEL"/>
         <result property="signalSource" column="SIGNAL_SOURCE"/>
+        <result property="channel" column="channel"/>
+        <result property="riskCustNum" column="risk_cust_num"/>
 
         <result property="cardNum" column="CARD_NUM" />
         <result property="custTel" column="CUST_TEL" />
         <result property="riskComfType" column="RISK_COMF_TYPE" />
+        <result property="riskValue" column="risk_value" />
 
         <result property="isProprietary" column="is_Proprietary"/>
 
@@ -59,9 +62,12 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="isManualInput" column="is_Manual_Input"/>
         <result property="custManager" column="cust_Manager"/>
         <result property="isProprietary" column="is_Proprietary"/>
+        <result property="riskCustNum" column="risk_cust_num"/>
+        <result property="channel" column="channel"/>
         <result property="cardNum" column="CARD_NUM" />
         <result property="custTel" column="CUST_TEL" />
         <result property="riskComfType" column="RISK_COMF_TYPE" />
+        <result property="riskValue" column="risk_value" />
         <collection property="bondInfoList" ofType="com.skyon.project.system.domain.eye.TBondInfo">
             <id property="bondInfoID" column="bond_info_ID"/>
             <result property="taskInfoNo" column="task_Info_No"/>
@@ -127,7 +133,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     </select>
 
     <update id="updateRunStatusByNo" parameterType="String">
-        update w_task_info set run_status = '02' where TASK_INFO_NO = #{taskInfoNo}
+        update w_task_info set run_status = '02',risk_value=#{riskValue} where TASK_INFO_NO = #{taskInfoNo}
     </update>
 
     <update id="celarRunStatusByNo" parameterType="String">

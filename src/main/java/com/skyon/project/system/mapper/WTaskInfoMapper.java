@@ -15,8 +15,8 @@ public interface WTaskInfoMapper {
     // 查询预警认定角色的任务详细
     public List<WTaskInfo> getWTaskInfoListByRole(String role);
 
-    // 根据taskInfoNo 修改run_status状态
-    public int updateRunStatusByNo(String taskInfoNo);
+    // 根据taskInfoNo 修改run_status状态与风险管控措施值
+    public int updateRunStatusByNo(String taskInfoNo, String riskValue);
 
     // 初始化run_status状态
     public int celarRunStatusByNo(String taskInfoNo);

@@ -119,7 +119,7 @@ public class TaskInfoController extends BaseController {
             logger.info("----taskName----: {}", taskName);
             // 执行成功后 修改w_task_info 表里的状态 run_status
             if (WFLink.WFLINK101.getInfo().equals(taskName)) {
-                i = taskInfoService.updateRunStatusByNo(taskInfoNo);
+                i = taskInfoService.updateRunStatusByNo(taskInfoNo,riskValue);
             }
             // insert环节流转
             linkLogService.insertWLinkLog(taskInfoNo, "RD", WFLink.WFLINK101.getInfo(), user.getUserName(),

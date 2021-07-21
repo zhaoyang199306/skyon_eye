@@ -46,8 +46,8 @@ public class WTaskInfoServiceImpl implements WTaskInfoService {
     }
 
     @Override
-    public int updateRunStatusByNo(String taskInfoNo) {
-        return taskInfoMapper.updateRunStatusByNo(taskInfoNo);
+    public int updateRunStatusByNo(String taskInfoNo, String riskValue) {
+        return taskInfoMapper.updateRunStatusByNo(taskInfoNo, riskValue);
     }
 
     @Override
