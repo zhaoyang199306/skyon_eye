@@ -50,7 +50,7 @@ public class WLinkLogController extends BaseController {
             int i = linkLogService.deleteList(taskInfoNo);
             logger.info("------------删除流程信息表----删除-----{}  条", i);
 
-            // 修改w_task_info表状态
+            // 修改DP_AP_task_info表状态
             int i1 = taskInfoService.celarRunStatusByNo(taskInfoNo);
 
             // 删除工作流表 信息

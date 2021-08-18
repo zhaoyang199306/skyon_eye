@@ -222,7 +222,7 @@ public class TSqlDevelopController extends BaseController {
                     param.getJobName(), "1", arr, tDataSource, tDataResultSources);
 
             // 若正常启动了，启动后需杀死进程
-            if (map != null && map.size() > 0) {
+            if (map != null && !map.isEmpty()) {
                 if (map.get("applicationId") != null) {
                     tSqlDevelopService.jobKill(map.get("applicationId").toString());
 

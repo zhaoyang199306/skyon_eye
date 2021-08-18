@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.eye.DpRmMonRuleSignalMapper">
+	
+
+    <resultMap id="DpRmMonRuleSignalResult" type="com.skyon.project.system.domain.eye.DpRmMonRuleSignal">
+        <result property="prtNo" column="prt_no"/>
+        <result property="prtName" column="prt_name"/>
+        <result property="orgCode" column="org_code"/>
+        <result property="analyTime" column="analy_time"/>
+        <result property="ruleId" column="rule_id"/>
+        <result property="ruleName" column="rule_name"/>
+        <result property="ruleClass" column="rule_class"/>
+        <result property="accidCustRate" column="accid_cust_rate"/>
+        <result property="hitCustNum" column="hit_cust_num"/>
+        <result property="hitCustBal" column="hit_cust_bal"/>
+        <result property="hitCustRate" column="hit_cust_rate"/>
+        <result property="affNum" column="aff_num"/>
+        <result property="affRiskCustNum" column="aff_risk_cust_num"/>
+        <result property="artAffNum" column="art_aff_num"/>
+        <result property="artAffRigNum" column="art_aff_rig_num"/>
+        <result property="aveConversion" column="ave_Conversion"/>
+
+
+    </resultMap>
+	
+	<select id="selectDpRmMonRuleSignal" parameterType="String"
+            resultType="DpRmMonRuleSignal" resultMap="DpRmMonRuleSignalResult">
+        (select d.xaxisvalue,nvl(sum(s.hit_cust_num),0) as hit_cust_num
+        from( select * from DP_RM_MON_RULE_SIGNAL  where accid_cust_rate = #{warnLevel} and analy_time <![CDATA[<= ]]> #{dateStr}  ) s
+        right join (select '00' as xAxisValue,#{warnLevel} as accid_cust_rate  from dual) d on d.accid_cust_rate = s.accid_cust_rate)
+        union
+        (select times.xAxisValue,nvl(sum(e.hit_cust_num),0) as hit_cust_num
+        FROM (SELECT * FROM DP_RM_MON_RULE_SIGNAL where accid_cust_rate = #{warnLevel} or accid_cust_rate is null) e
+        RIGHT JOIN (
+            SELECT
+                TO_CHAR(add_months(to_date(to_char(trunc(to_date(#{date},'yyyy-MM'), 'mm')+1, 'yyyy-mm'), 'yyyy-mm'), -(ROWNUM - 1)), 'yyyymm') as xAxisValue
+            FROM dual
+            CONNECT BY ROWNUM  <![CDATA[<= ]]> 6
+            ORDER BY TO_CHAR(add_months(to_date(to_char(trunc(to_date(#{date},'yyyy-MM'), 'mm')+1, 'yyyy-mm'), 'yyyy-mm'), -(ROWNUM - 1)), 'yyyymm') ASC
+        ) times
+        on e.analy_time = times.xAxisValue
+        group by times.xAxisValue,accid_cust_rate)
+    </select>
+
+
+
+
+</mapper>

@@ -1,18 +1,17 @@
 package com.skyon.project.system.service;
 
-import com.skyon.project.system.domain.ferghana.WTaskInfo;
+import com.skyon.project.system.domain.ferghana.DpApTaskInfo;
 
 import java.util.List;
 import java.util.Set;
 
 public interface WTaskInfoService {
 
-    public List<WTaskInfo> getWTaskInfoByList1(Set set);
-    public List<WTaskInfo> getWTaskInfoByList2(List list);
-    public List<WTaskInfo> getWTaskInfoByList3(List list);
+    public List<DpApTaskInfo> getWTaskInfoByList1(Set set);
+
 
     // 查询预警认定角色的任务详细
-    public List<WTaskInfo> getWTaskInfoListByRole(String role);
+    public List<DpApTaskInfo> getWTaskInfoListByRole(String role);
 
     // 根据taskInfoNo 修改run_status状态
     public int updateRunStatusByNo(String taskInfoNo,String riskValue,String personalRiskLevel,String checkResult);
@@ -21,7 +20,7 @@ public interface WTaskInfoService {
 
     public int celarRunStatusByNo(String taskInfoNo);
 
-    public int insertWTaskInfo(WTaskInfo wTaskInfo);
+    public int insertWTaskInfo(DpApTaskInfo dpApTaskInfo);
 
     // 查询所有的task_info_no
     public List selectAllTaskInfoNo();
@@ -30,4 +29,9 @@ public interface WTaskInfoService {
     public Set selectIsProprietary();
 
     public Set selectIsNoProprietary();
+
+    // 根据任务编号查询任务详情
+    public DpApTaskInfo selectDpApTaskInfoByTaskInfoNo(String taskInfoNo);
+
+
 }

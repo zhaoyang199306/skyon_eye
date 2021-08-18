@@ -10,4 +10,6 @@ public interface TBondInfoMapper {
     // 新增
     public int insertTBondInfo(List<TBondInfo> tBondInfo);
 
+    public int selectTBondInfos(String taskInfoNo);
+
 }

@@ -9,8 +9,8 @@ public enum DealType {
     GZ("GZ","跟踪处置"),
     JC("JC","任务解除");
 
-    private String code;
-    private String info;
+    private final String code;
+    private final String info;
 
     DealType(String code, String info) {
         this.code = code;

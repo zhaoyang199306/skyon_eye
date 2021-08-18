@@ -24,13 +24,15 @@ public class EfficiencyAnalysisController extends BaseController {
     @GetMapping("/list/{dateString}")
     public AjaxResult getAllData(@PathVariable String dateString) {
         logger.info("----getAllData---的日期：{}", dateString);
-        try {
-            EfficiencyAnalysisData data = effService.getEfficiencyAnalysisData(dateString);
-            return AjaxResult.success(data);
-        } catch (Exception ignored){
-            logger.error(ignored.getMessage());
-            return AjaxResult.error("效能分析查询报错");
-        }
+        EfficiencyAnalysisData data = effService.getEfficiencyAnalysisData(dateString);
+        return AjaxResult.success(data);
+//        try {
+//
+//
+//        } catch (Exception ignored){
+//            logger.error(ignored.getMessage());
+//            return AjaxResult.error("效能分析查询报错");
+//        }
 
     }
 

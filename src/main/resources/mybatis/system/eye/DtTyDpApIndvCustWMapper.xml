@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skyon.project.system.mapper.eye.DtSmMiniCorpCustWMapper">
-	
+<mapper namespace="com.skyon.project.system.mapper.eye.DpApCompanyInfoMapper">
 
-    <resultMap id="DtSmMiniCorpCustWResult" type="DtSmMiniCorpCustW">
+
+    <resultMap id="DpApCompanyInfoResult" type="com.skyon.project.system.domain.eye.DpApCompanyInfo">
         <result property="lpOrgNo" column="LP_ORG_NO"/>
         <result property="custNo" column="CUST_NO"/>
         <result property="custName" column="CUST_NAME"/>
@@ -29,9 +29,9 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         <result property="partYm" column="PART_YM"/>
         <result property="monitorType" column="MONITOR_TYPE"/>
     </resultMap>
-	
-	<select id="getDtSmMiniCorpCustWByNo" parameterType="String" resultType="DtSmMiniCorpCustW" resultMap="DtSmMiniCorpCustWResult">
-        select * from DT_SM_MINI_CORP_CUST_W
+
+	<select id="getDpApCompanyInfoByNo" parameterType="String" resultType="DpApCompanyInfo" resultMap="DpApCompanyInfoResult">
+        select * from DP_AP_company_INFO
         where cust_no = #{custNo}
     </select>
 

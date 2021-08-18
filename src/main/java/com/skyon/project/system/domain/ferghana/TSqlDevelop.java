@@ -2,58 +2,67 @@ package com.skyon.project.system.domain.ferghana;
 
 import com.skyon.framework.aspectj.lang.annotation.Excel;
 import com.skyon.framework.web.domain.BaseEntity;
+
 import java.util.Date;
 import java.util.Scanner;
 
 /**
  * SQL任务开发对象 t_sql_develop
- * 
  *
  * @date 2020-06-04
  */
-public class TSqlDevelop extends BaseEntity
-{
+public class TSqlDevelop extends BaseEntity {
 
     public static void main(String[] args) {
         String s = "";
         Scanner scanner = new Scanner(System.in);
-        new Thread(){
-            public void run(){
-                while (true){
+        new Thread() {
+            public void run() {
+                while (true) {
                     char c = scanner.next().toUpperCase().charAt(0);
                     System.out.println(c);
                 }
             }
         }.start();
 
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                System.out.println("222");
-            }
+        new Thread(() -> {
+            System.out.println("222");
         }).start();
     }
+
     private static final long serialVersionUID = 1L;
 
-    /** $column.columnComment */
+    /**
+     * $column.columnComment
+     */
     private Long sqlDevelopId;
 
-    /** 作业名称 */
+    /**
+     * 作业名称
+     */
     @Excel(name = "作业名称")
     private String sqlTaskName;
 
-    /** sql */
+    /**
+     * sql
+     */
     @Excel(name = "sql")
     private String sqlContent;
 
-    /** 版本 */
+    /**
+     * 版本
+     */
     @Excel(name = "版本")
     private String sqlTaskVersion;
 
-    /** 数据源表id */
+    /**
+     * 数据源表id
+     */
     private Long sourceTableId;
 
-    /** 结果表id */
+    /**
+     * 结果表id
+     */
     private String resultTableIds;
 
 
@@ -61,79 +70,77 @@ public class TSqlDevelop extends BaseEntity
 
     private String jobId;
 
-    /** 运行状态（0停止 1启用） */
+    /**
+     * 运行状态（0停止 1启用）
+     */
     @Excel(name = "运行状态", readConverterExp = "0=停止,1=启用")
     private String runStatus;
 
-    /** 启动时间 */
+    /**
+     * 启动时间
+     */
     @Excel(name = "启动时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date startTime;
 
-    /** 停用时间 */
+    /**
+     * 停用时间
+     */
     @Excel(name = "停用时间", width = 30, dateFormat = "yyyy-MM-dd")
     private Date stopTime;
 
-    public void setSqlDevelopId(Long sqlDevelopId) 
-    {
+    public void setSqlDevelopId(Long sqlDevelopId) {
         this.sqlDevelopId = sqlDevelopId;
     }
 
-    public Long getSqlDevelopId() 
-    {
+    public Long getSqlDevelopId() {
         return sqlDevelopId;
     }
-    public void setSqlTaskName(String sqlTaskName) 
-    {
+
+    public void setSqlTaskName(String sqlTaskName) {
         this.sqlTaskName = sqlTaskName;
     }
 
-    public String getSqlTaskName() 
-    {
+    public String getSqlTaskName() {
         return sqlTaskName;
     }
-    public void setSqlContent(String sqlContent) 
-    {
+
+    public void setSqlContent(String sqlContent) {
         this.sqlContent = sqlContent;
     }
 
-    public String getSqlContent() 
-    {
+    public String getSqlContent() {
         return sqlContent;
     }
-    public void setSqlTaskVersion(String sqlTaskVersion) 
-    {
+
+    public void setSqlTaskVersion(String sqlTaskVersion) {
         this.sqlTaskVersion = sqlTaskVersion;
     }
 
-    public String getSqlTaskVersion() 
-    {
+    public String getSqlTaskVersion() {
         return sqlTaskVersion;
     }
-    public void setRunStatus(String runStatus) 
-    {
+
+    public void setRunStatus(String runStatus) {
         this.runStatus = runStatus;
     }
 
-    public String getRunStatus() 
-    {
+    public String getRunStatus() {
         return runStatus;
     }
-    public void setStartTime(Date startTime) 
-    {
+
+    public void setStartTime(Date startTime) {
         this.startTime = startTime;
     }
 
-    public Date getStartTime() 
-    {
+    public Date getStartTime() {
         return startTime;
     }
-    public void setStopTime(Date stopTime) 
-    {
+
+    public void setStopTime(Date stopTime) {
         this.stopTime = stopTime;
     }
 
-    public Date getStopTime() 
-    {
+    public Date getStopTime() {
         return stopTime;
     }
 

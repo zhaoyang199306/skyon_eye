@@ -39,13 +39,13 @@ public class TDatasourceFieldServiceImpl implements ITDatasourceFieldService {
         map.put("id", tVariableCenter.getVariableClassification());
         map.put("variableName", "[" + tVariableCenter.getVariableNameEn() + "]");
         map.put("fields", listOne.toArray());
-        if (listOne.size() > 0) {
+        if (!listOne.isEmpty()) {
             fieldMapper.updateFieldNameIsUsed(map);
         }
 
         // 修改数据维表 对应的字段
         List list = joinDeleteParamList(tVariableCenter);
-        if (list.size() > 0) {
+        if (!list.isEmpty()) {
             fieldMapper.updateDimensionTableFieldNameIsUsed(list);
         }
 
@@ -58,7 +58,7 @@ public class TDatasourceFieldServiceImpl implements ITDatasourceFieldService {
 //				,{"name":"数据维表:EP_CUST_INF","col":["CUST_NO_TWO-主键","EP_CUST_INF.ADDR"]}]
         JSONArray array = JSON.parseArray(tVariableCenter.getTestDimensionTableCol().toString());
         List list = new ArrayList();
-        if (array != null && array.size() > 0) {
+        if (array != null && !array.isEmpty()) {
             for (int i = 0; i < array.size(); i++) {
                 JSONObject jsonObject = (JSONObject) array.get(i);
                 String name = jsonObject.get("name").toString();
@@ -87,7 +87,7 @@ public class TDatasourceFieldServiceImpl implements ITDatasourceFieldService {
         // 需要改变的字段
         JSONArray array = JSON.parseArray(tVariableCenter.getTestSourceTableCol().toString());
         List listOne = new ArrayList();
-        if (array != null && array.size() > 0) {
+        if (array != null && !array.isEmpty()) {
 //            ["TRAN_NO-主键","TRAN_TIME-水印","EP_OPENACCT_FLOW_TABLE.BSN_CODE","EP_OPENACCT_FLOW_TABLE.STATUS",
 //            "CUST_NO-EP_CUST_INF关联字段","ACCT_NO-EP_BIND_ACCT关联字段"]
             for (int i = 0; i < array.size(); i++) {
@@ -154,7 +154,7 @@ public class TDatasourceFieldServiceImpl implements ITDatasourceFieldService {
         map.put("id", tVariableCenter.getVariableClassification());
         map.put("variableName", "[" + tVariableCenter.getVariableNameEn() + "]");
         map.put("fields", listOne.toArray());
-        if (listOne.size() > 0) {
+        if (!listOne.isEmpty()) {
             fieldMapper.updateIsUsedTableType01ById(map);
         }
 

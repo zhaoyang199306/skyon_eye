@@ -33,4 +33,8 @@
 
     </insert>
 
+    <select id="selectTBondInfos" parameterType="String" resultType="TBondInfo" resultMap="TBondInfoResult">
+        select * from t_bond_info where task_info_no  = #{taskInfoNo}
+    </select>
+
 </mapper>

@@ -3,6 +3,7 @@ package com.skyon.project.system.controller.eyeController;
 import com.skyon.framework.web.controller.BaseController;
 import com.skyon.framework.web.domain.AjaxResult;
 import com.skyon.project.system.domain.PanoramicRiskViewTotal;
+import com.skyon.project.system.domain.ferghana.DpApTaskInfo;
 import com.skyon.project.system.service.PanoramicViewService;
 import lombok.extern.log4j.Log4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ public class PanoramicViewController extends BaseController {
     private PanoramicViewService panoramicViewService;
 
     @GetMapping("/list")
-    public AjaxResult getList() {
+    public AjaxResult getList(DpApTaskInfo dpApTaskInfo) {
         startPage();
         List list = panoramicViewService.selectPanoramicViewList();
         return AjaxResult.success(list);

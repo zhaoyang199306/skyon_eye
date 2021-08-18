@@ -5,7 +5,6 @@ import com.skyon.project.system.mapper.*;
 import com.skyon.project.system.mapper.eye.*;
 import com.skyon.project.system.service.PanoramicViewService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,9 +18,9 @@ public class PanoramicViewServiceImpl implements PanoramicViewService {
     @Autowired
     private PanoramicViewMapper panoramicViewMapper;
     @Autowired
-    private DtTyDpApIndvCustWMapper dtTyDpApIndvCustWMapper; // 个人客户信息表
+    private DpApCustInfoMapper dpApCustInfoMapper; // 个人客户信息表
     @Autowired
-    private DtSmMiniCorpCustWMapper dtSmMiniCorpCustWMapper;// 小微企业客户
+    private DpApCompanyInfoMapper dpApCompanyInfoMapper;// 小微企业客户
     @Autowired
     private DtCustRiskTagWMapper dtCustRiskTagWMapper; // 客户风险_标签
     @Autowired
@@ -67,7 +66,7 @@ public class PanoramicViewServiceImpl implements PanoramicViewService {
     @Autowired
     private Dp360GuaranteeInfoMapper dp360GuaranteeInfoMapper;// 担保信息
     @Autowired
-    private WTaskInfoMapper wTaskInfoMapper; //
+    private DpApTaskInfoMapper dpApTaskInfoMapper; //
 
 
     /**
@@ -90,14 +89,14 @@ public class PanoramicViewServiceImpl implements PanoramicViewService {
      *
      * @param custNo   客户号
      * @param custType 客户类型
-     * @return T DtSmMiniCorpCustW  - 小微企业客户   or  DtTyDpApIndvCustW  - 个人客户信息表
+     * @return T DpApCompanyInfo  - 小微企业客户   or  DpApCustInfo  - 个人客户信息表
      */
     @Override
     public Object getCustInfoByNo(String custNo, String custType) {
         if (ALONG_PERSONAL.equals(custType)) { // 个人
-            return dtTyDpApIndvCustWMapper.getDtTyDpApIndvCustWByNo(custNo);
+            return dpApCustInfoMapper.getDpApCustInfoByNo(custNo);
         } else if (SMALL_COMPANY.equals(custType)) { //小微
-            return dtSmMiniCorpCustWMapper.getDtSmMiniCorpCustWByNo(custNo);
+            return dpApCompanyInfoMapper.getDtSmMiniCorpCustWByNo(custNo);
         }
         return null;
     }
@@ -114,8 +113,8 @@ public class PanoramicViewServiceImpl implements PanoramicViewService {
         total.setDpCustOutRating(dpCustOutRatingMapper.selectDpCustOutRating(custNo).size() == 0 ?
                 null : dpCustOutRatingMapper.selectDpCustOutRating(custNo));
         //
-        total.setwTaskInfos(wTaskInfoMapper.selectWTaskInfoByCustNo(custNo).size() == 0?
-                null : wTaskInfoMapper.selectWTaskInfoByCustNo(custNo));
+        total.setDpApTaskInfos(dpApTaskInfoMapper.selectWTaskInfoByCustNo(custNo).size() == 0?
+                null : dpApTaskInfoMapper.selectWTaskInfoByCustNo(custNo));
 
         // 客户风险_裁判文书
         total.setDtCustRiskRefereeDocAList(dtCustRiskRefereeDocAMapper.selectDtCustRiskRefereeDocA(custNo).size() == 0 ?

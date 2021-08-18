@@ -54,10 +54,10 @@
 
     <select id="selectPanoramicViewList" resultType="map">
         select s.cust_no as custNo,s.cust_name as custName,'个人' as custType,s.monitor_type as monitorType,s.BELONG_BRCH as belongBrch,
-        s.CUST_MGR as custMgr from DT_TY_DP_AP_INDV_CUST_W s
+        s.CUST_MGR as custMgr from DP_AP_cust_info s
 union all
         select w.cust_no as custNo,w.cust_name as custName,'小微企业' as custType,w.monitor_type as monitorType,w.BELONG_BRCH as belongBrch,
-        w.cust_mgr as custMgr from DT_SM_MINI_CORP_CUST_W w
+        w.cust_mgr as custMgr from DP_AP_company_INFO w
     </select>
 
     <sql id="selectDp360CustInfoVo">

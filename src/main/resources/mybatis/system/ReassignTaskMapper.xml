@@ -39,7 +39,7 @@
     </select>
 
     <select id="getUnReassignTaskList" resultType="map">
-        select s.task_info_no,s.cust_no,s.cust_name,u.user_name,r.role_name from w_task_info s
+        select s.task_info_no,s.cust_no,s.cust_name,u.user_name,r.role_name from DP_AP_task_info s
         left join  act_ru_execution d on s.task_info_no = d.business_key_
         left join act_ru_task f on d.proc_inst_id_ = f.proc_inst_id_
         left join sys_user u on f.assignee_ = u.user_id

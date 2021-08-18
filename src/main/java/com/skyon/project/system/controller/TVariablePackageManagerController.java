@@ -199,7 +199,7 @@ public class TVariablePackageManagerController extends BaseController {
         ArrayList testResultItem = (ArrayList) pk.getTestResultItem();
         String s = "";
         List list = new ArrayList();
-        if (result.size() > 0) {
+        if (!result.isEmpty()) {
             for (int i = 0; i < sourceTableValue.size(); i++) {
                 for (int j = 0; j < result.size(); j++) {
                     Map map = new HashMap();
@@ -257,7 +257,7 @@ public class TVariablePackageManagerController extends BaseController {
         int i = 0;
         Object jobId = mapResult.get("jobId");
         Object applicationId = mapResult.get("applicationId");
-        if (mapResult.size() > 0 && jobId != null) {
+        if (jobId != null && !mapResult.isEmpty()) {
             pkManager.setApplicationId(applicationId);
             pkManager.setJobId(jobId);
             String[] s = pathArray[2].split(" ");
@@ -283,7 +283,7 @@ public class TVariablePackageManagerController extends BaseController {
         // 停止任务
         Map<String, String> map = tVariablePackageManagerService.jobKill(pkManager);
         int i = 0;
-        if (map.size() > 0) {
+        if (!map.isEmpty()) {
             if ("success".equals(map.get("result"))) { // 成功杀死
                 // 不清除 applicationId and jobId
 //                pkManager.setApplicationId("");

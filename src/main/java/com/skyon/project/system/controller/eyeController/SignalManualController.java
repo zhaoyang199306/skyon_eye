@@ -2,7 +2,7 @@ package com.skyon.project.system.controller.eyeController;
 
 import com.skyon.framework.web.controller.BaseController;
 import com.skyon.framework.web.domain.AjaxResult;
-import com.skyon.project.system.domain.ferghana.WTaskInfo;
+import com.skyon.project.system.domain.ferghana.DpApTaskInfo;
 import com.skyon.project.system.service.SignalManualSevice;
 import com.skyon.project.system.service.WTaskInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,11 +29,11 @@ public class SignalManualController extends BaseController {
     //    保存form
     @PostMapping("/submitForm")
     @Transactional
-    public AjaxResult submitForm(@RequestBody WTaskInfo wTaskInfo) {
+    public AjaxResult submitForm(@RequestBody DpApTaskInfo dpApTaskInfo) {
 
         System.out.println("--signalManual/submitForm");
-        wTaskInfo.setIsManualInput("1");
-        int i = taskInfoService.insertWTaskInfo(wTaskInfo);
+        dpApTaskInfo.setIsManualInput("1");
+        int i = taskInfoService.insertWTaskInfo(dpApTaskInfo);
         if (i > 0) {
             return AjaxResult.success("成功新增人工信号");
         }
@@ -53,7 +53,7 @@ public class SignalManualController extends BaseController {
 
         List list = new ArrayList();
 
-        WTaskInfo taskInfo = signalManualSevice.getWTaskInfoListManualByCustNo(custNo);
+        DpApTaskInfo taskInfo = signalManualSevice.getWTaskInfoListManualByCustNo(custNo);
 
         return AjaxResult.success(list);
     }

@@ -2,11 +2,11 @@ package com.skyon.project.system.domain.eye;
 
 /**
  * @description 个人客户信息表
- * DT_TY_DP_AP_INDV_CUST_W
+ * DP_AP_cust_info
  * @author skyon
  * @date 2021-05-25
  */
-public class DtTyDpApIndvCustW {
+public class DpApCustInfo {
 
     // 法人机构标识
     private String lpOrgNo;
@@ -161,10 +161,9 @@ public class DtTyDpApIndvCustW {
      */
     private String spouseContAddr;
 
-    /**
-     * 所属分行
-     */
-    private String belongBrch;
+
+
+
 
     /**
      * 客户经理
@@ -188,6 +187,10 @@ public class DtTyDpApIndvCustW {
 
     private String monitorType;
 
+    private String branch;
+
+    private String nextBranch;
+
     /**
      * 逻辑分区--年月日
      */
@@ -197,7 +200,7 @@ public class DtTyDpApIndvCustW {
 
     @Override
     public String toString() {
-        return "DtTyDpApIndvCustW{" +
+        return "DpApCustInfo{" +
                 "lpOrgNo='" + lpOrgNo + '\'' +
                 ", custNo='" + custNo + '\'' +
                 ", custName='" + custName + '\'' +
@@ -229,7 +232,6 @@ public class DtTyDpApIndvCustW {
                 ", spouseCertNo='" + spouseCertNo + '\'' +
                 ", spouseWorkUnitName='" + spouseWorkUnitName + '\'' +
                 ", spouseContAddr='" + spouseContAddr + '\'' +
-                ", belongBrch='" + belongBrch + '\'' +
                 ", custMgr='" + custMgr + '\'' +
                 ", custMgrTel='" + custMgrTel + '\'' +
                 ", etlDt='" + etlDt + '\'' +
@@ -237,6 +239,22 @@ public class DtTyDpApIndvCustW {
                 ", partYmd='" + partYmd + '\'' +
                 ", partYm='" + partYm + '\'' +
                 '}';
+    }
+
+    public String getBranch() {
+        return branch;
+    }
+
+    public void setBranch(String branch) {
+        this.branch = branch;
+    }
+
+    public String getNextBranch() {
+        return nextBranch;
+    }
+
+    public void setNextBranch(String nextBranch) {
+        this.nextBranch = nextBranch;
     }
 
     public String getMonitorType() {
@@ -495,13 +513,6 @@ public class DtTyDpApIndvCustW {
         this.spouseContAddr = spouseContAddr;
     }
 
-    public String getBelongBrch() {
-        return belongBrch;
-    }
-
-    public void setBelongBrch(String belongBrch) {
-        this.belongBrch = belongBrch;
-    }
 
     public String getCustMgr() {
         return custMgr;
@@ -550,4 +561,6 @@ public class DtTyDpApIndvCustW {
     public void setPartYm(String partYm) {
         this.partYm = partYm;
     }
+
+
 }

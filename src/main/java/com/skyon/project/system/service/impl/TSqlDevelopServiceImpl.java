@@ -92,7 +92,7 @@ public class TSqlDevelopServiceImpl implements ITSqlDevelopService {
         if ("0".equals(tSqlDevelop.getRunStatus())) tSqlDevelop.setStopTime(new Date());
         else tSqlDevelop.setStartTime(new Date());
 
-        if (map != null && map.size() > 0) {
+        if (map != null && !map.isEmpty()) {
             tSqlDevelop.setApplicationId(map.get("applicationId"));
             tSqlDevelop.setJobId(map.get("jobId"));
         }
@@ -120,7 +120,7 @@ public class TSqlDevelopServiceImpl implements ITSqlDevelopService {
         // 只在启动的时候检查
         if ("1".equals(tSqlDevelop.getRunStatus())) {
             Map s = tSqlDevelopMapper.selectBooleanStart(tSqlDevelop);
-            if (s != null && s.size() > 0) {
+            if (s != null && !s.isEmpty()) {
                 throw new CustomException("该作业中版本号为:" + s.get("sqlTaskVersion") + " 还有在启动中的，不能启动多个！");
             }
         }
@@ -342,7 +342,7 @@ public class TSqlDevelopServiceImpl implements ITSqlDevelopService {
 //                    kafkaMessageSend(tDataSource.getZookeeperAddress(), tDataSource.getKafkaAddress(),
 //                            "upwisdom_test_" + tDataSource.getTopicName(), param);
                     StringBuilder s = new StringBuilder();
-                    if (tDataResultSources != null && tDataResultSources.size() > 0) {
+                    if (tDataResultSources != null && !tDataResultSources.isEmpty()) {
                         for (int i = 0; i < tDataResultSources.size(); i++) {
                             TDataResultSource tDataResultSource = tDataResultSources.get(i);
                             String message = kafkaMessageGet(tDataResultSource.getZookeeperAddress(), tDataResultSource.getKafkaAddress(),

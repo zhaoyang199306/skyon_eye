@@ -33,11 +33,20 @@ public class EfficiencyAnalysisData {
 
 
 //    -----------------------信号维度分析-----------------------------
+    private List<List<DpRmMonRuleSignal>> dpRmMonRuleSignals; // DP_RM_MON_RULE_SIGNAL
 
 
 
 //    -----------------------get/set-----------------------------
 
+
+    public List<List<DpRmMonRuleSignal>> getDpRmMonRuleSignals() {
+        return dpRmMonRuleSignals;
+    }
+
+    public void setDpRmMonRuleSignals(List<List<DpRmMonRuleSignal>> dpRmMonRuleSignals) {
+        this.dpRmMonRuleSignals = dpRmMonRuleSignals;
+    }
 
     public List<DpRmMonRuleSysIng> getBals() {
         return bals;

@@ -11,6 +11,7 @@ import com.skyon.framework.web.controller.BaseController;
 import com.skyon.framework.web.domain.AjaxResult;
 import com.skyon.project.system.domain.SysRole;
 import com.skyon.project.system.domain.SysUser;
+import com.skyon.project.system.domain.ferghana.DpApTaskInfo;
 import com.skyon.project.system.service.WLinkLogService;
 import com.skyon.project.system.service.WTaskInfoService;
 import com.skyon.project.system.service.activiti.RunWFService;
@@ -62,7 +63,7 @@ public class DisposalTrackController extends BaseController {
             map.put(WFRole.WFROLE202.getCode(), "7"); // 市场零售部门主管审核 组
 
             // 执行任务
-            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
             logger.info("----taskName----: {}", taskName);
 
             // insert环节流转
@@ -75,7 +76,7 @@ public class DisposalTrackController extends BaseController {
                 // 某个任务，启动流程
                 runWFService.startWf(taskInfoNo, map);
                 // 执行任务
-                taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+                taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
 
                 if (WFLink.WFLINK201.getInfo().equals(taskName)){
                     linkLogService.insertWLinkLog(taskInfoNo, DealType.GZ.getCode(), WFLink.WFLINK201.getInfo(), user.getUserName(),
@@ -89,7 +90,7 @@ public class DisposalTrackController extends BaseController {
             map.put(WFRole.WFROLE203.getCode(), "8"); // 分行风险检测岗审核 组
 
             // 执行任务
-            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
             logger.info("----taskName----: {}", taskName);
 
             // insert环节流转
@@ -101,7 +102,7 @@ public class DisposalTrackController extends BaseController {
             map.put(WFRole.WFROLE204.getCode(), "9"); // 分行监测审核岗审核 组
 
             // 执行任务
-            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
             logger.info("----taskName----: {}", taskName);
 
             // insert环节流转
@@ -113,7 +114,7 @@ public class DisposalTrackController extends BaseController {
             map.put(WFRole.WFROLE205.getCode(), "10"); // 分行检测主管审核 组
 
             // 执行任务
-            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
             logger.info("----taskName----: {}", taskName);
 
             // insert环节流转
@@ -125,7 +126,7 @@ public class DisposalTrackController extends BaseController {
             map.put(WFRole.WFROLE301.getCode(), "6"); // 客户经理 组
 
             // 执行任务
-            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
             logger.info("----taskName----: {}", taskName);
 
             // insert环节流转
@@ -140,14 +141,15 @@ public class DisposalTrackController extends BaseController {
 
 
     @GetMapping("/list")
-    public AjaxResult getSignalManualList(Object object) {
+    public AjaxResult getSignalManualList(DpApTaskInfo dpApTaskInfo) {
+        startPage();
         List list = new ArrayList();
 
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
         SysUser user = loginUser.getUser();
 
         // 根据用户id查询代办任务
-        Map mapTask = taskWFService.taskWfUser(user.getUserId() + "");
+        Map mapTask = taskWFService.taskWfUser(String.valueOf(user.getUserId()));
         Set<String> set = new HashSet<>();
         // 只计算在里面的
         List listAll = taskInfoService.selectAllTaskInfoNo();
@@ -172,7 +174,7 @@ public class DisposalTrackController extends BaseController {
         set.addAll(proprietarys);
         set.addAll(noProprietary);
         // 查询待办箱
-        if (set.size() > 0) list = taskInfoService.getWTaskInfoByList1(set);
+        if (!set.isEmpty()) list = taskInfoService.getWTaskInfoByList1(set);
 
 
 

@@ -106,10 +106,10 @@ public class TVariablePackageManagerServiceImpl implements ITVariablePackageMana
         pkManager.setRuningState("0"); // 初始化都是0 停止
         pkManager.setResultTableSql(setResultTableSql(pkManager, runFlag, ""));
         pkManager.setVariableId(JSON.toJSONString(pkManager.getVariableId()));
-        pkManager.setVarDir(System.currentTimeMillis() + "");
+        pkManager.setVarDir(String.valueOf(System.currentTimeMillis()));
         pkManager.setOriginalVariableSql(joinOriginalVariableSql(map, pkManager));
         ArrayList array = (ArrayList) pkManager.getOriginalVariable();
-        if (array != null && array.size() > 0) {
+        if (array != null && !array.isEmpty()) {
             pkManager.setOriginalVariable(JSON.toJSONString(pkManager.getOriginalVariable()));
         } else {
             pkManager.setOriginalVariable("");
@@ -125,12 +125,12 @@ public class TVariablePackageManagerServiceImpl implements ITVariablePackageMana
     private String joinOriginalVariableSql(Map map, TVariablePackageManager pkManager) {
         StringBuilder sb = new StringBuilder();
         ArrayList array = (ArrayList) pkManager.getOriginalVariable();
-        if (array != null && array.size() > 0) {
+        if (array != null && !array.isEmpty()) {
             sb.append("select ");
             String tableName = "";
             // 有维表时
             JSONArray dimensionRelation = JSON.parseArray(map.get("dimensionRelation").toString());
-            if (dimensionRelation != null && dimensionRelation.size() > 0) {
+            if (dimensionRelation != null && !dimensionRelation.isEmpty()) {
                 String s = "";
                 for (int i = 0; i < dimensionRelation.size(); i++) {
                     JSONObject o = (JSONObject) dimensionRelation.get(i);
@@ -148,7 +148,7 @@ public class TVariablePackageManagerServiceImpl implements ITVariablePackageMana
                     tableName = tableName + "_join_" + dimensionNameJOIN;
                 }
             } else {
-                tableName = map.get("tableName") + "";
+                tableName = String.valueOf(map.get("tableName"));
             }
 
             // 拼接字段
@@ -235,7 +235,7 @@ public class TVariablePackageManagerServiceImpl implements ITVariablePackageMana
             // 移除到originalVariableSql去了
             // 若有原始变量，把原始变量加进去
             ArrayList array = (ArrayList) pkManager.getOriginalVariable();
-            if (array != null && array.size() > 0) {
+            if (array != null && !array.isEmpty()) {
                 // 拼接字段
                 String field = "";
                 for (int i = 0; i < array.size(); i++) {
@@ -289,7 +289,7 @@ public class TVariablePackageManagerServiceImpl implements ITVariablePackageMana
         tVariablePackageManager.setVariableId(JSON.toJSONString(tVariablePackageManager.getVariableId()));
         tVariablePackageManager.setOriginalVariableSql(joinOriginalVariableSql(map, tVariablePackageManager));
         ArrayList array = (ArrayList) tVariablePackageManager.getOriginalVariable();
-        if (array != null && array.size() > 0) {
+        if (array != null && !array.isEmpty()) {
             tVariablePackageManager.setOriginalVariable(JSON.toJSONString(tVariablePackageManager.getOriginalVariable()));
         }
         return tVariablePackageManagerMapper.updateTVariablePackageManager(tVariablePackageManager);
@@ -360,7 +360,7 @@ public class TVariablePackageManagerServiceImpl implements ITVariablePackageMana
         list.addAll(tVariableCenters);
         // 目的是移除派生变量的基础变量
         ArrayList<TVariableCenter> listDmo = new ArrayList<>();
-        if (tVariableCenters != null && tVariableCenters.size() > 0) {
+        if (!tVariableCenters.isEmpty()) {
             for (int i = 0; i < tVariableCenters.size(); i++) {
                 TVariableCenter tVariableCenter = tVariableCenters.get(i);
                 if ("02".equals(tVariableCenter.getVariableType())
@@ -447,7 +447,7 @@ public class TVariablePackageManagerServiceImpl implements ITVariablePackageMana
         mapParam.put("fieldOutNum", objects.length + 1 + num);
         mapParam.put("sourcePrimaryKey", map.get("schemaPrimaryKey").toString());
         ArrayList sourceTableValue = (ArrayList) pk.getSourceTableValue();
-        if (sourceTableValue != null && sourceTableValue.size() > 0) {
+        if (sourceTableValue != null && !sourceTableValue.isEmpty()) {
             ArrayList value = new ArrayList();
             for (int i = 0; i < sourceTableValue.size(); i++) {
                 Map mapNew = new HashMap();
@@ -513,7 +513,7 @@ public class TVariablePackageManagerServiceImpl implements ITVariablePackageMana
 
         // 有维表时
         JSONArray dimensionRelation = JSON.parseArray(map.get("dimensionRelation").toString());
-        if (dimensionRelation != null && dimensionRelation.size() > 0) {
+        if (dimensionRelation != null && !dimensionRelation.isEmpty()) {
             String s = "";
             String t = "";
             List listNew = new ArrayList();
@@ -527,11 +527,11 @@ public class TVariablePackageManagerServiceImpl implements ITVariablePackageMana
                 }
 
             }
-            if (listNew.size() > 0) {
+            if (!listNew.isEmpty()) {
                 List<TDimensionTable> dimensionTables = tDimensionTableMapper.getTDimensionTableListByNames(listNew.toArray());
                 List list = new ArrayList();
                 String m = "";
-                if (dimensionTables != null && dimensionTables.size() > 0) { // 有维表
+                if (dimensionTables != null && !dimensionTables.isEmpty()) { // 有维表
                     for (int i = 0; i < dimensionTables.size(); i++) {
                         TDimensionTable table = dimensionTables.get(i);
                         Map mapTmp = new HashMap();
@@ -553,7 +553,7 @@ public class TVariablePackageManagerServiceImpl implements ITVariablePackageMana
                                 }
                             }
                         }
-                        if (mapTmp.size() > 0) list.add(mapTmp);
+                        if (!mapTmp.isEmpty()) list.add(mapTmp);
                     }
                     mapParam.put("dimensionTable", list);
                     StringBuilder sb = new StringBuilder();

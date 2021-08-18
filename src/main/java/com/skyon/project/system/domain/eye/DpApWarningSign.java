@@ -6,21 +6,22 @@ import java.util.Date;
 
 /**
  * 预警信号列表
- * warn_signal
+ * DP_AP_WARNING_SIGN
  */
-public class TWarnSignal {
-    public TWarnSignal() {
+public class DpApWarningSign {
+
+    public DpApWarningSign() {
     }
 
     private String taskInfoNo;
     private String taskNum;
-    private String nowDealRole;
-    private String singleName;
-    private String singleLevel;
-    private String warmResson;
-    private String touchDate;
-    private String devolutionDate;
-    private String comfStatus;
+    private String nowDealRole; // 当前处理岗
+    private String singleName; // 信号名称
+    private String singleLevel; // 信号等级
+    private String warmResson; // 预警原因
+    private String touchDate; // 触发日期
+    private String devolutionDate; // 下放时间
+    private String comfStatus; // 认定状态
 
     public String getComfStatus() {
         return comfStatus;

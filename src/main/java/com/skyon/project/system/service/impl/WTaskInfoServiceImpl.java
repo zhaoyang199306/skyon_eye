@@ -1,9 +1,9 @@
 package com.skyon.project.system.service.impl;
 
 import com.skyon.project.system.domain.eye.TBondInfo;
-import com.skyon.project.system.domain.ferghana.WTaskInfo;
+import com.skyon.project.system.domain.ferghana.DpApTaskInfo;
 import com.skyon.project.system.mapper.TBondInfoMapper;
-import com.skyon.project.system.mapper.WTaskInfoMapper;
+import com.skyon.project.system.mapper.DpApTaskInfoMapper;
 import com.skyon.project.system.service.WTaskInfoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,7 +15,7 @@ import java.util.Set;
 public class WTaskInfoServiceImpl implements WTaskInfoService {
 
     @Autowired
-    private WTaskInfoMapper taskInfoMapper;
+    private DpApTaskInfoMapper taskInfoMapper;
     @Autowired
     private TBondInfoMapper bondInfoMapper;
 
@@ -26,28 +26,19 @@ public class WTaskInfoServiceImpl implements WTaskInfoService {
      * @return 实体集合
      */
     @Override
-    public List<WTaskInfo> getWTaskInfoByList1(Set set) {
+    public List<DpApTaskInfo> getWTaskInfoByList1(Set set) {
         return taskInfoMapper.getWTaskInfoByList1(set);
     }
 
-    @Override
-    public List<WTaskInfo> getWTaskInfoByList2(List list) {
-        return taskInfoMapper.getWTaskInfoByList2(list);
-    }
 
     @Override
-    public List<WTaskInfo> getWTaskInfoByList3(List list) {
-        return taskInfoMapper.getWTaskInfoByList3(list);
-    }
-
-    @Override
-    public List<WTaskInfo> getWTaskInfoListByRole(String role) {
+    public List<DpApTaskInfo> getWTaskInfoListByRole(String role) {
         return taskInfoMapper.getWTaskInfoListByRole(role);
     }
 
     @Override
-    public int updateRunStatusByNo(String taskInfoNo, String riskValue, String personalRiskLevel, String checkResult) {
-        return taskInfoMapper.updateRunStatusByNo(taskInfoNo, riskValue, personalRiskLevel, checkResult);
+    public int updateRunStatusByNo(String taskInfoNo, String riskControlMeasures, String personalRiskLevel, String checkResult) {
+        return taskInfoMapper.updateRunStatusByNo(taskInfoNo, riskControlMeasures, personalRiskLevel, checkResult);
     }
 
     @Override
@@ -61,12 +52,12 @@ public class WTaskInfoServiceImpl implements WTaskInfoService {
     }
 
     @Override
-    public int insertWTaskInfo(WTaskInfo wTaskInfo) {
-        int i = taskInfoMapper.insertWTaskInfo(wTaskInfo);
-        List<TBondInfo> bondInfoList = wTaskInfo.getBondInfoList();
-        if (bondInfoList.size() > 0) {
+    public int insertWTaskInfo(DpApTaskInfo dpApTaskInfo) {
+        int i = taskInfoMapper.insertWTaskInfo(dpApTaskInfo);
+        List<TBondInfo> bondInfoList = dpApTaskInfo.getBondInfoList();
+        if (!bondInfoList.isEmpty()) {
             for (TBondInfo tBondInfo : bondInfoList) {
-                tBondInfo.setTaskInfoNo(wTaskInfo.getTaskInfoNo());
+                tBondInfo.setTaskInfoNo(dpApTaskInfo.getTaskInfoNo());
             }
             bondInfoMapper.insertTBondInfo(bondInfoList);
         }
@@ -86,6 +77,11 @@ public class WTaskInfoServiceImpl implements WTaskInfoService {
     @Override
     public Set selectIsNoProprietary() {
         return taskInfoMapper.selectIsNoProprietary();
+    }
+
+    @Override
+    public DpApTaskInfo selectDpApTaskInfoByTaskInfoNo(String taskInfoNo) {
+        return taskInfoMapper.selectDpApTaskInfoByTaskInfoNo(taskInfoNo);
     }
 
 

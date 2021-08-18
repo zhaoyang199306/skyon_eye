@@ -157,7 +157,7 @@ public class TSelfFunctionServiceImpl implements ITSelfFunctionService {
     @Override
     public void selectTSelfFunctionByNameCn(String selfFunctionNameCn) {
         List<TSelfFunction> tSelfFunctions = tSelfFunctionMapper.selectTSelfFunctionByNameCn(selfFunctionNameCn);
-        if (tSelfFunctions != null && tSelfFunctions.size() > 0) {
+        if (tSelfFunctions != null && !tSelfFunctions.isEmpty()) {
             throw new CustomException("该函数中文名已存在！");
         }
     }
@@ -165,7 +165,7 @@ public class TSelfFunctionServiceImpl implements ITSelfFunctionService {
     @Override
     public void selectTSelfFunctionByName(String name) {
         List<TSelfFunction> tSelfFunctions = tSelfFunctionMapper.selectTSelfFunctionByName(name);
-        if (tSelfFunctions != null && tSelfFunctions.size() > 0) {
+        if (tSelfFunctions != null && !tSelfFunctions.isEmpty()) {
             throw new CustomException("该函数名已存在！");
         }
     }
@@ -173,7 +173,7 @@ public class TSelfFunctionServiceImpl implements ITSelfFunctionService {
     @Override
     public void selectTSelfFunctionByPackage(String packagePath) {
         List<TSelfFunction> tSelfFunctions = tSelfFunctionMapper.selectTSelfFunctionByPackage(packagePath);
-        if (tSelfFunctions != null && tSelfFunctions.size() > 0) {
+        if (tSelfFunctions != null && !tSelfFunctions.isEmpty()) {
             throw new CustomException("该函数路径已存在！");
         }
     }

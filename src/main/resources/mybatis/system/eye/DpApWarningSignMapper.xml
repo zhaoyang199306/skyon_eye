@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
 PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.skyon.project.system.mapper.eye.TWarnSignalMapper">
+<mapper namespace="com.skyon.project.system.mapper.eye.DpApWarningSignMapper">
 
 
-    <resultMap id="TWarnSignalResult" type="com.skyon.project.system.domain.eye.TWarnSignal">
+    <resultMap id="DpApWarningSignResult" type="com.skyon.project.system.domain.eye.DpApWarningSign">
 
         <result property="taskInfoNo" column="task_info_no"/>
         <result property="taskNum" column="task_num"/>
@@ -19,19 +19,17 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 
     </resultMap>
 
-	<select id="selectTWarnSignal" parameterType="String"
-            resultType="TWarnSignal" resultMap="TWarnSignalResult">
-        select * from Warn_Signal
+	<select id="selectDpApWarningSign" parameterType="String"
+            resultType="DpApWarningSign" resultMap="DpApWarningSignResult">
+        select * from DP_AP_WARNING_SIGN
         where task_info_no = #{taskInfoNo}
     </select>
 
-    <update id="updateTWarnSignal" parameterType="com.skyon.project.system.domain.eye.TWarnSignal">
-        <foreach collection="collection" separator=";" item="item">
-
-                update Warn_Signal set
+    <update id="updateDpApWarningSign" parameterType="com.skyon.project.system.domain.eye.DpApWarningSign">
+        <foreach collection="list" item="item"  open="begin" separator=";" close=";end;">
+                update DP_AP_WARNING_SIGN set
                 comf_status = #{item.comfStatus}
                 where task_info_no = #{item.taskInfoNo} and task_num = #{item.taskNum}
-
         </foreach>
 
     </update>

@@ -123,7 +123,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
         // 查询表  如果为join拼接表 新表的格式为: xxxx_join_xxxx   该新表会在启动的时候创建！！！！
         String resultTableName = "";
 
-        if (dimensionName != null && dimensionName.size() > 0) {
+        if (dimensionName != null && !dimensionName.isEmpty()) {
             String name = "";
             for (int i = 0; i < dimensionName.size(); i++) {
                 JSONObject o = (JSONObject) dimensionName.get(i);
@@ -150,7 +150,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
                 String key = variable.getRedisKey();
                 // 如果作用函数有值，需加上 格式： function(字段)
                 Map redisSelfFunctionItem = (Map) variable.getRedisSelfFunctionItem();
-                if (redisSelfFunctionItem.size() > 0) {
+                if (!redisSelfFunctionItem.isEmpty()) {
                     Object effectFunction = redisSelfFunctionItem.get("effectFunction");
                     Object beginIndex = redisSelfFunctionItem.get("beginIndex");
                     Object lengthNum = redisSelfFunctionItem.get("lengthNum");
@@ -196,7 +196,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
                     // 是否分组判断
                     ArrayList statisticsGroupItem = (ArrayList) variable.getStatisticsGroupItem();
                     String group = "";
-                    if (statisticsGroupItem != null && statisticsGroupItem.size() > 0) {
+                    if (statisticsGroupItem != null && !statisticsGroupItem.isEmpty()) {
                         for (int i = 0; i < statisticsGroupItem.size(); i++) {
                             Map o = (Map) statisticsGroupItem.get(i);
                             String groupField = o.get("groupField").toString();
@@ -276,7 +276,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
                             .append(variable.getVariableFactor() + "_RE");  // 变量因子及类型 _RE为当求值字段为主键时，加的区分辨识,改成只要有where添加，都加
                     if (variable.getStatisticsGroupItem() != null) {
                         ArrayList statisticsGroup = (ArrayList) variable.getStatisticsGroupItem();
-                        if (statisticsGroup != null && statisticsGroup.size() > 0) {
+                        if (statisticsGroup != null && !statisticsGroup.isEmpty()) {
                             String group = "";
                             for (int i = 0; i < statisticsGroup.size(); i++) {
                                 Map map = (Map) statisticsGroup.get(i);
@@ -340,7 +340,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
                 String[] strings1 = strings.toArray(new String[strings.size()]);
                 List<TVariableCenter> tVariableCenters = tVariableCenterMapper.selectTVariableCenterByNames(strings1);
                 String s = "";
-                if (tVariableCenters != null && tVariableCenters.size() > 0) {
+                if (tVariableCenters != null && !tVariableCenters.isEmpty()) {
                     for (int i = 0; i < tVariableCenters.size(); i++) {
                         TVariableCenter tVariableCenter = tVariableCenters.get(i);
                         String sqlContext = tVariableCenter.getSqlContext();
@@ -393,7 +393,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
                 String[] strings1 = strings.toArray(new String[strings.size()]);
                 List<TVariableCenter> tVariableCenters = tVariableCenterMapper.selectTVariableCenterByNames(strings1);
                 String s = "";
-                if (tVariableCenters != null && tVariableCenters.size() > 0) {
+                if (tVariableCenters != null && !tVariableCenters.isEmpty()) {
                     for (int i = 0; i < tVariableCenters.size(); i++) {
                         TVariableCenter tVariableCenter = tVariableCenters.get(i);
                         String sqlContext = tVariableCenter.getSqlContext();
@@ -412,7 +412,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
             }
         }
         // 把所有的表名. 去掉
-        if (dimensionName != null && dimensionName.size() > 0) {
+        if (dimensionName != null && !dimensionName.isEmpty()) {
             for (int i = 0; i < dimensionName.size(); i++) {
                 JSONObject o = (JSONObject) dimensionName.get(i);
                 String dimensionName1 = o.get("dimensionName").toString();
@@ -446,7 +446,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
         }
         // 如果变量因子有作用函数
         Map redisSelfFunctionItem = (Map) selfFunction;
-        if (redisSelfFunctionItem.size() > 0) {
+        if (!redisSelfFunctionItem.isEmpty()) {
             Object effectFunction = redisSelfFunctionItem.get("effectFunction");
             Object beginIndex = redisSelfFunctionItem.get("beginIndex");
             Object lengthNum = redisSelfFunctionItem.get("lengthNum");
@@ -532,7 +532,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
 
     // 当有维表的时候拼接joinSQL 和 维表测试数据
     public void parseJoinSQl(Map mapParam, JSONArray dimensionRelation, Map map, ArrayList array) {
-        if (dimensionRelation != null && dimensionRelation.size() > 0) {
+        if (dimensionRelation != null && !dimensionRelation.isEmpty()) {
             String s = "";
             String t = "";
             List listDimension = new ArrayList();
@@ -545,15 +545,15 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
                     listDimension.add(dimensionName);
                 }
             }
-            if (listDimension.size() > 0) {
+            if (!listDimension.isEmpty()) {
                 List<TDimensionTable> dimensionTables = tDimensionTableMapper.getTDimensionTableListByNames(listDimension.toArray());
 //          样式 "dimensionTable":[{"dimensionTableSql":"CREATE, TABLE ...","testDimType":"02","testDimdata":"JSON数组形式"}
                 List list = new ArrayList();
                 String m = "";
-                if (dimensionTables != null && dimensionTables.size() > 0) { // 有维表
+                if (dimensionTables != null && !dimensionTables.isEmpty()) { // 有维表
                     for (int i = 0; i < dimensionTables.size(); i++) {
                         TDimensionTable table = dimensionTables.get(i);
-                        if (array != null && array.size() > 0) {
+                        if (array != null && !array.isEmpty()) {
                             for (int j = 0; j < array.size(); j++) {
                                 Map o = (Map) array.get(j);
                                 String name = o.get("name").toString();
@@ -562,7 +562,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
                                     mapTmp.put("dimensionTableSql", table.getJdbcCreateSql());
                                     mapTmp.put("testDimType", "02");
                                     ArrayList arrlist = (ArrayList) o.get("dimensionTableValue");
-                                    if (arrlist != null && arrlist.size() > 0) {
+                                    if (arrlist != null && !arrlist.isEmpty()) {
                                         mapTmp.put("testDimdata", parseSplit(arrlist));
                                     }
 
@@ -571,7 +571,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
                                     mapTmp.put("testDimType", "03");
                                     // 为了去掉前面的表名
                                     ArrayList arrlist = (ArrayList) o.get("dimensionTableValue");
-                                    if (arrlist != null && arrlist.size() > 0) {
+                                    if (arrlist != null && !arrlist.isEmpty()) {
                                         List dd = new ArrayList();
                                         for (int k = 0; k < arrlist.size(); k++) {
                                             Map tmo = (Map) arrlist.get(k);
@@ -591,7 +591,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
                                         mapTmp.put("testDimdata", dd);
                                     }
                                 }
-                                if (mapTmp.size() > 0) list.add(mapTmp);
+                                if (!mapTmp.isEmpty()) list.add(mapTmp);
                             }
                         } else {
                             Map mapTmp = new HashMap();
@@ -602,7 +602,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
                                 mapTmp.put("dimensionTableSql", table.getHbaseCreateSql());
                                 mapTmp.put("testDimType", "03");
                             }
-                            if (mapTmp.size() > 0) list.add(mapTmp);
+                            if (!mapTmp.isEmpty()) list.add(mapTmp);
                         }
 
                         for (int j = 0; j < dimensionRelation.size(); j++) {
@@ -666,7 +666,7 @@ public class TVariableCenterServiceImpl implements ITVariableCenterService {
         }
         mapParam.put("sourcePrimaryKey", map.get("schemaPrimaryKey").toString());
         ArrayList sourceTableValue = (ArrayList) variable.getSourceTableValue();
-        if (sourceTableValue != null && sourceTableValue.size() > 0) {
+        if (sourceTableValue != null && !sourceTableValue.isEmpty()) {
             mapParam.put("testSourcedata", parseSplit(sourceTableValue));
         }
 

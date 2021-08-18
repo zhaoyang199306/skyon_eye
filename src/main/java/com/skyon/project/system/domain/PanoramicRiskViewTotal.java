@@ -1,7 +1,7 @@
 package com.skyon.project.system.domain;
 
 import com.skyon.project.system.domain.eye.*;
-import com.skyon.project.system.domain.ferghana.WTaskInfo;
+import com.skyon.project.system.domain.ferghana.DpApTaskInfo;
 
 import java.util.List;
 
@@ -16,7 +16,7 @@ public class PanoramicRiskViewTotal {
 
     private List<DpCustOutRating> dpCustOutRating; // 评级情况
 
-    private List<WTaskInfo> wTaskInfos;//
+    private List<DpApTaskInfo> dpApTaskInfos;//
 
 //    ----------------------------司法诉讼--------------------------------------
 
@@ -121,12 +121,12 @@ public class PanoramicRiskViewTotal {
         this.dtTyDpApLiabFinWList = dtTyDpApLiabFinWList;
     }
 
-    public List<WTaskInfo> getwTaskInfos() {
-        return wTaskInfos;
+    public List<DpApTaskInfo> getDpApTaskInfos() {
+        return dpApTaskInfos;
     }
 
-    public void setwTaskInfos(List<WTaskInfo> wTaskInfos) {
-        this.wTaskInfos = wTaskInfos;
+    public void setDpApTaskInfos(List<DpApTaskInfo> dpApTaskInfos) {
+        this.dpApTaskInfos = dpApTaskInfos;
     }
 
     public DtTyDpApPublicRecA getDtTyDpApPublicRecA() {

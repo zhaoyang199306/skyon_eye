@@ -23,7 +23,7 @@ public class OperationServiceImpl implements OperationService {
     @Override
     public List getJobDetail(List<TVariablePackageManager> list) {
         List listResult = new ArrayList();
-        if (list != null && list.size() > 0) {
+        if (list != null && !list.isEmpty()) {
 
             for (int i = 0; i < list.size(); i++) {
                 TVariablePackageManager tVariablePackageManager = list.get(i);
@@ -172,7 +172,7 @@ public class OperationServiceImpl implements OperationService {
         List list = new ArrayList();
         JSONObject jsonObject = JSON.parseObject(result);
         JSONArray logs = (JSONArray) jsonObject.get("logs");
-        if (logs != null && logs.size() > 0) {
+        if (logs != null && !logs.isEmpty()) {
             for (int i = 0; i < logs.size(); i++) {
                 TaskManagerLogList taskManagerLogListJob = new TaskManagerLogList();
                 JSONObject o = (JSONObject) logs.get(i);

@@ -1,7 +1,5 @@
 package com.skyon.project.system.domain.eye;
 
-import org.springframework.web.bind.annotation.RequestParam;
-
 import java.util.List;
 
 public class TaskInfoSubmitPojo {
@@ -10,12 +8,12 @@ public class TaskInfoSubmitPojo {
     }
 
     private String taskInfoNo;
-    private String riskValue;
+    private Object riskControlMeasures; // 风险管控措施
     private Object radio;
     private String examinValue;
     private String personalRiskLevel;
     private String checkResult;
-    private List<TWarnSignal> warnSignalList;
+    private List<DpApWarningSign> warnSignalList;
 
     public String getTaskInfoNo() {
         return taskInfoNo;
@@ -25,12 +23,12 @@ public class TaskInfoSubmitPojo {
         this.taskInfoNo = taskInfoNo;
     }
 
-    public String getRiskValue() {
-        return riskValue;
+    public Object getRiskControlMeasures() {
+        return riskControlMeasures;
     }
 
-    public void setRiskValue(String riskValue) {
-        this.riskValue = riskValue;
+    public void setRiskControlMeasures(Object riskControlMeasures) {
+        this.riskControlMeasures = riskControlMeasures;
     }
 
     public Object getRadio() {
@@ -65,11 +63,11 @@ public class TaskInfoSubmitPojo {
         this.checkResult = checkResult;
     }
 
-    public List<TWarnSignal> getWarnSignalList() {
+    public List<DpApWarningSign> getWarnSignalList() {
         return warnSignalList;
     }
 
-    public void setWarnSignalList(List<TWarnSignal> warnSignalList) {
+    public void setWarnSignalList(List<DpApWarningSign> warnSignalList) {
         this.warnSignalList = warnSignalList;
     }
 }

@@ -17,7 +17,7 @@ import java.lang.annotation.Target;
 public @interface DataScope
 {
     /**
-     * 部门表的别名
+     * 部门表的别名  default 默认，否则使用的使用必须给值
      */
     public String deptAlias() default "";
 

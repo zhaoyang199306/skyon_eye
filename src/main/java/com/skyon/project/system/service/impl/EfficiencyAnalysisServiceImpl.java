@@ -31,9 +31,12 @@ public class EfficiencyAnalysisServiceImpl implements EfficiencyAnalysisService 
     @Autowired
     private DpRmMonTaskOveMapper dpRmMonTaskOveMapper; // 任务超期情况
 
+
     //---
     @Autowired
     private DpRmMonRuleSysIngMapper dpRmMonRuleSysIngMapper; // 系统运营分析    DP_RM_MON_RULE_SYS_ING
+    @Autowired
+    private DpRmMonRuleSignalMapper dpRmMonRuleSignalMapper; // 信号维度分析
 
 
     // 查询效能分析全数据
@@ -95,6 +98,16 @@ public class EfficiencyAnalysisServiceImpl implements EfficiencyAnalysisService 
         // 预警余额统计
         List<DpRmMonRuleSysIng> bals = dpRmMonRuleSysIngMapper.selectDpRmMonRuleSysIngBal(ymDate.replaceAll("-", ""));
         data.setBals(bals.size() == 0 ? null : bals);
+
+        // 信号维度分析
+        List<DpRmMonRuleSignal> oneLevel = dpRmMonRuleSignalMapper.selectDpRmMonRuleSignal(ymDate, dateString,"一级预警");
+        List<DpRmMonRuleSignal> twoLevel = dpRmMonRuleSignalMapper.selectDpRmMonRuleSignal(ymDate, dateString,"二级预警");
+        List<DpRmMonRuleSignal> threeLevel = dpRmMonRuleSignalMapper.selectDpRmMonRuleSignal(ymDate, dateString,"三级预警");
+        List<List<DpRmMonRuleSignal>> list = new ArrayList<>();
+        list.add(oneLevel);
+        list.add(twoLevel);
+        list.add(threeLevel);
+        data.setDpRmMonRuleSignals(list);
 
 
         return data;
@@ -164,6 +177,7 @@ public class EfficiencyAnalysisServiceImpl implements EfficiencyAnalysisService 
         return 0;
 
     }
+
 
 
 }

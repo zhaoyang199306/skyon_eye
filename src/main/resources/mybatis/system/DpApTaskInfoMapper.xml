@@ -1,0 +1,151 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.skyon.project.system.mapper.DpApTaskInfoMapper">
+
+
+    <resultMap id="WTaskInfoResultAlone" type="com.skyon.project.system.domain.ferghana.DpApTaskInfo">
+        <id property="taskInfoNo" column="TASK_INFO_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="queueId" column="queue_Id"/>
+        <result property="queueName" column="queue_Name"/>
+        <result property="publishDepartment" column="publish_Department"/>
+        <result property="testSubType" column="TEST_SUB_TYPE"/>
+        <result property="doneDate" column="DONE_DATE"/>
+        <result property="status" column="run_STATUS"/>
+        <result property="limits" column="LIMITS"/>
+        <result property="sysRiskLevel" column="sys_risk_Level"/>
+        <result property="isManualInput" column="is_Manual_Input"/>
+        <result property="custManager" column="cust_Manager"/>
+
+        <result property="riskTime" column="RISK_TIME"/>
+        <result property="warnRiskLevel" column="WARN_RISK_LEVEL"/>
+        <result property="ruleLevel" column="RULE_LEVEL"/>
+        <result property="scoreLevel" column="SCORE_LEVEL"/>
+        <result property="signalSource" column="SIGNAL_SOURCE"/>
+        <result property="channel" column="channel"/>
+        <result property="riskCustNum" column="risk_cust_num"/>
+
+        <result property="riskComfType" column="RISK_COMF_TYPE" />
+        <result property="riskControlMeasures" column="risk_Control_Measures" />
+        <result property="personalRiskLevel" column="PERSONAL_RISK_LEVEL" />
+        <result property="checkResult" column="CHECK_RESULT" />
+
+        <result property="isProprietary" column="is_Proprietary"/>
+
+    </resultMap>
+
+    <resultMap id="DpApTaskInfoResult" type="com.skyon.project.system.domain.ferghana.DpApTaskInfo">
+        <id property="taskInfoNo" column="TASK_INFO_NO"/>
+        <result property="custNo" column="CUST_NO"/>
+        <result property="queueId" column="queue_Id"/>
+        <result property="queueName" column="queue_Name"/>
+        <result property="publishDepartment" column="publish_Department"/>
+        <result property="testSubType" column="TEST_SUB_TYPE"/>
+        <result property="doneDate" column="DONE_DATE"/>
+        <result property="status" column="STATUS"/>
+        <result property="limits" column="LIMITS"/>
+        <result property="sysRiskLevel" column="sys_Risk_Level"/>
+        <result property="isManualInput" column="is_Manual_Input"/>
+        <result property="custManager" column="cust_Manager"/>
+        <result property="isProprietary" column="is_Proprietary"/>
+        <result property="riskCustNum" column="risk_cust_num"/>
+        <result property="channel" column="channel"/>
+        <result property="riskComfType" column="RISK_COMF_TYPE" />
+        <result property="riskControlMeasures" column="risk_Control_Measures" />
+        <result property="personalRiskLevel" column="PERSONAL_RISK_LEVEL" />
+        <result property="checkResult" column="CHECK_RESULT" />
+        <result property="trackTime" column="track_Time" />
+        <association property="dpApCustInfo"  column="cust_no"
+                     select="com.skyon.project.system.mapper.eye.DpApCustInfoMapper.getDpApCustInfoByNo"/>
+        <collection property="bondInfoList" ofType="TBondInfo" column="task_Info_No"
+                    select="com.skyon.project.system.mapper.TBondInfoMapper.selectTBondInfos" />
+        <collection property="warnSignals" ofType="DpApWarningSign" column="task_Info_No"
+                    select="com.skyon.project.system.mapper.eye.DpApWarningSignMapper.selectDpApWarningSign"/>
+    </resultMap>
+
+	<select id="getWTaskInfoByList1" resultType="DpApTaskInfo" resultMap="DpApTaskInfoResult">
+        select * from DP_AP_task_info
+        where TASK_INFO_NO in
+        <foreach collection="collection" item="set" open="(" close=")" separator=",">
+            #{set}
+        </foreach>
+        and role = '预警认定'
+    </select>
+
+    <select id="getWTaskInfoListByRole" resultType="map">
+        SELECT info.task_info_no as taskInfoNo,info.cust_no as custNo,cust.cust_name as custName,cust.branch,cust.next_Branch as nextBranch
+        ,COUNT(CASE WHEN SINGLE_LEVEL = '一级预警' THEN 1 ELSE NULL END) AS oneLevelCount
+        ,COUNT(CASE WHEN SINGLE_LEVEL = '二级预警' THEN 1 ELSE NULL END) AS twoLevelCount
+        ,COUNT(CASE WHEN SINGLE_LEVEL = '三级预警' THEN 1 ELSE NULL END) AS threeLevelCount
+        FROM DP_AP_TASK_INFO info
+        LEFT JOIN DP_AP_CUST_INFO cust ON info.CUST_NO = cust.CUST_NO
+        LEFT JOIN DP_AP_WARNING_SIGN w ON info.TASK_INFO_NO = w.TASK_INFO_NO
+        where role = #{role} and run_status = '01' and is_Proprietary = '0'
+        GROUP BY info.task_info_no,info.cust_no,cust.cust_name,cust.branch,cust.next_Branch
+    </select>
+
+    <select id="selectDpApTaskInfoByTaskInfoNo" resultMap="DpApTaskInfoResult"
+            resultType="com.skyon.project.system.domain.ferghana.DpApTaskInfo">
+        select * from DP_AP_task_info
+        where task_info_no = #{taskInfoNo}
+    </select>
+
+    <select id="selectWTaskInfoByCustNo" resultType="DpApTaskInfo" resultMap="WTaskInfoResultAlone">
+        select * from DP_AP_task_info where CUST_NO = #{custNo}
+    </select>
+
+    <select id="getWTaskInfoListByManual" resultType="DpApTaskInfo" resultMap="DpApTaskInfoResult">
+        select * from DP_AP_task_info where is_manual_input='1'
+    </select>
+
+    <select id="selectAllTaskInfoNo" resultType="String">
+        select TASK_INFO_NO from DP_AP_task_info
+    </select>
+
+
+    <select id="getWTaskInfoListManualByCustNo" resultType="DpApTaskInfo" resultMap="DpApTaskInfoResult">
+        select * from DP_AP_task_info t
+        left join t_bond_info s on t.task_info_no = s.task_info_no
+        where t.is_manual_input='1' and t.cust_no = #{custNO}
+    </select>
+
+    <select id="selectIsProprietary" resultType="String">
+        select TASK_INFO_NO from DP_AP_task_info t
+        where run_status = '01' and is_Proprietary = '1'
+    </select>
+
+    <select id="selectIsNoProprietary" resultType="String">
+        select TASK_INFO_NO from DP_AP_task_info t
+        where run_status = '01' and is_Proprietary = '2'
+    </select>
+
+    <update id="updateRunStatusByNo" parameterType="String">
+        update DP_AP_task_info set
+        <if test="riskControlMeasures != null || riskControlMeasures != ''">risk_Control_Measures=#{riskControlMeasures},</if>
+        <if test="personalRiskLevel != null">PERSONAL_RISK_LEVEL=#{personalRiskLevel},</if>
+        <if test="checkResult != null">CHECK_RESULT=#{checkResult},</if>
+        run_status = '02'
+         where TASK_INFO_NO = #{taskInfoNo}
+    </update>
+
+    <update id="updateRunStatusByNoAndTrack" parameterType="String">
+        update DP_AP_task_info set run_status = '02' where TASK_INFO_NO = #{taskInfoNo}
+    </update>
+
+    <update id="celarRunStatusByNo" parameterType="String">
+        update DP_AP_task_info set run_status = '01' where TASK_INFO_NO = #{taskInfoNo}
+    </update>
+
+    <insert id="insertWTaskInfo" parameterType="DpApTaskInfo" >
+        <selectKey  keyColumn="TASK_INFO_NO" keyProperty="taskInfoNo" resultType="long" order="BEFORE">
+            select DP_AP_task_info_sequence.nextval from dual
+        </selectKey>
+        insert into DP_AP_task_info (TASK_INFO_NO,cust_Name,cust_No,branch,cust_Manager,is_manual_input)
+        values (DP_AP_task_info_sequence.nextval,#{custName},#{custNo},#{branch},#{custManager},#{isManualInput})
+    </insert>
+
+
+
+</mapper>

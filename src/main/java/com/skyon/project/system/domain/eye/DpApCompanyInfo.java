@@ -2,10 +2,10 @@ package com.skyon.project.system.domain.eye;
 
 /**
  *
- * DT_SM_MINI_CORP_CUST_W
+ * DP_AP_company_INFO
  * 小微企业客户
  */
-public class DtSmMiniCorpCustW {
+public class DpApCompanyInfo {
     private String lpOrgNo; // 法人机构标识
     private String custNo; // 客户编号
     private String custName; // 客户名称
@@ -32,7 +32,7 @@ public class DtSmMiniCorpCustW {
 
     @Override
     public String toString() {
-        return "DtSmMiniCorpCustW{" +
+        return "DpApCompanyInfo{" +
                 "lpOrgNo='" + lpOrgNo + '\'' +
                 ", custNo='" + custNo + '\'' +
                 ", custName='" + custName + '\'' +

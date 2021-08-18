@@ -9,16 +9,14 @@ import com.skyon.framework.web.controller.BaseController;
 import com.skyon.framework.web.domain.AjaxResult;
 import com.skyon.project.system.domain.SysRole;
 import com.skyon.project.system.domain.SysUser;
-import com.skyon.project.system.domain.ferghana.WTaskInfo;
+import com.skyon.project.system.domain.ferghana.DpApTaskInfo;
 import com.skyon.project.system.service.WTaskInfoService;
 import com.skyon.project.system.service.WorkbenchService;
 import com.skyon.project.system.service.activiti.TaskWFService;
-import org.apache.ibatis.annotations.Case;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import sun.nio.ch.Net;
 
 import java.util.*;
 
@@ -30,6 +28,8 @@ import java.util.*;
 @RestController
 @RequestMapping("/workbench")
 public class WorkbenchController extends BaseController {
+
+    public static final String EARLY_WARN_COGNIZANCE = "预警认定";
 
     @Autowired
     private WorkbenchService workbenchService;
@@ -58,7 +58,7 @@ public class WorkbenchController extends BaseController {
         List<SysRole> roles = user.getRoles();
 
         // 根据用户id查询代办任务
-        Map<String, String> mapTask = taskWFService.taskWfUser(user.getUserId() + "");
+        Map<String, String> mapTask = taskWFService.taskWfUser(String.valueOf(user.getUserId()));
 
         logger.info("-------个人任务池-----list: {}", mapTask.toString());
         Map<String, Integer> mapSelf = new HashMap<>();
@@ -68,8 +68,8 @@ public class WorkbenchController extends BaseController {
 
         // 预警认定初始单独计算
         if (RoleName.ACCOUNT_MANAGER.getInfo().equals((roles.get(0).getRoleName()))) {
-            List<WTaskInfo> wTaskInfoListByRole1 = taskInfoService.getWTaskInfoListByRole("预警认定");
-            taskInfoSelfCountNum = taskInfoSelfCountNum + wTaskInfoListByRole1.size();
+            List<DpApTaskInfo> dpApTaskInfoListByRole1 = taskInfoService.getWTaskInfoListByRole(EARLY_WARN_COGNIZANCE);
+            taskInfoSelfCountNum = taskInfoSelfCountNum + dpApTaskInfoListByRole1.size();
         }
 
         // 只计算在里面的

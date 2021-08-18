@@ -1,8 +1,8 @@
 package com.skyon.project.system.service.impl;
 
-import com.skyon.project.system.domain.ferghana.WTaskInfo;
+import com.skyon.project.system.domain.ferghana.DpApTaskInfo;
 import com.skyon.project.system.mapper.SignalManualMapper;
-import com.skyon.project.system.mapper.WTaskInfoMapper;
+import com.skyon.project.system.mapper.DpApTaskInfoMapper;
 import com.skyon.project.system.service.SignalManualSevice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +16,7 @@ public class SignalManualSeviceImpl implements SignalManualSevice {
     private SignalManualMapper signalManualMapper;
 
     @Autowired
-    private WTaskInfoMapper taskInfoMapper;
+    private DpApTaskInfoMapper taskInfoMapper;
 
     @Override
     public List getSignalManualList() {
@@ -24,7 +24,7 @@ public class SignalManualSeviceImpl implements SignalManualSevice {
     }
 
     @Override
-    public WTaskInfo getWTaskInfoListManualByCustNo(String custNo) {
+    public DpApTaskInfo getWTaskInfoListManualByCustNo(String custNo) {
         return taskInfoMapper.getWTaskInfoListManualByCustNo(custNo);
     }
 }

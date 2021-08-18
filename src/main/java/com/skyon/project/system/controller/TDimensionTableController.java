@@ -74,7 +74,7 @@ public class TDimensionTableController extends BaseController {
     public TableDataInfo getInfoSchema(@RequestParam("dimensionNames") String dimensionNames) {
         List list = new ArrayList();
         List<TDimensionTable> tdimensions = tDimensionTableService.getTdimensions(dimensionNames);
-        if (tdimensions != null && tdimensions.size() > 0) {
+        if (tdimensions != null && !tdimensions.isEmpty()) {
             for (int j = 0; j < tdimensions.size(); j++) {
                 Map maptmp = new HashMap();
                 List list1 = new ArrayList();

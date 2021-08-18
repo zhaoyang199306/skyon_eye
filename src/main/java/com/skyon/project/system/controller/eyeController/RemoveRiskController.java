@@ -63,7 +63,7 @@ public class RemoveRiskController extends BaseController {
             map.put(WFRole.WFROLE302.getCode(), "7"); // 市场零售部门主管审核 组
 
             // 执行任务
-            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
             logger.info("----taskName----: {}", taskName);
 
             // insert环节流转
@@ -76,7 +76,7 @@ public class RemoveRiskController extends BaseController {
             map.put(WFRole.WFROLE303.getCode(), "8"); // 分行风险检测岗审核 组
 
             // 执行任务
-            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
             logger.info("----taskName----: {}", taskName);
 
             // insert环节流转
@@ -88,7 +88,7 @@ public class RemoveRiskController extends BaseController {
             map.put(WFRole.WFROLE304.getCode(), "9"); // 分行监测审核岗审核 组
 
             // 执行任务
-            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
             logger.info("----taskName----: {}", taskName);
 
             // insert环节流转
@@ -100,7 +100,7 @@ public class RemoveRiskController extends BaseController {
             map.put(WFRole.WFROLE305.getCode(), "10"); // 分行检测主管审核 组
 
             // 执行任务
-            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
             logger.info("----taskName----: {}", taskName);
 
             // insert环节流转
@@ -111,7 +111,7 @@ public class RemoveRiskController extends BaseController {
         } else if (RoleName.INSPECTION_SUPERVISOR_AUDIT.getInfo().equals(roles.get(0).getRoleName())) {
 
             // 执行任务
-            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
             logger.info("----taskName----: {}", taskName);
 
             // insert环节流转
@@ -128,9 +128,9 @@ public class RemoveRiskController extends BaseController {
 //            // 某个任务，启动流程
 //            runWFService.startWf(taskInfoNo, map);
 //            // 执行任务
-//            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+//            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
 //            System.out.println("----taskName----" + taskName);
-//            // 执行成功后 修改w_task_info 表里的状态 run_status
+//            // 执行成功后 修改DP_AP_task_info 表里的状态 run_status
 //
 //            if ("客户经理申请".equals(taskName)) { // 第一个节点名
 //                i = taskInfoService.updateRunStatusByNo(taskInfoNo);
@@ -143,7 +143,7 @@ public class RemoveRiskController extends BaseController {
 //            // 执行预警认定审批任务
 //            map.put("trackuserid", user.getUserId()); // 市场零售部门主管审核员  id
 //            map.put("tracktwogroup","8"); // 分行风险检测岗审核 组
-//            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+//            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
 //
 //            System.out.println("----taskName----" + taskName);
 //            // 任务跟踪反馈分配人
@@ -156,7 +156,7 @@ public class RemoveRiskController extends BaseController {
 //        } else if ("分行风险检测岗审核".equals(roles.get(0).getRoleName())) {
 //            // 执行预警认定审批任务
 //            map.put("removeonegroup","9"); // 跟踪审批员组 id
-//            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+//            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
 //
 //            System.out.println("----taskName----" + taskName);
 //            // insert环节流转
@@ -168,7 +168,7 @@ public class RemoveRiskController extends BaseController {
 //            // 执行预警认定审批任务
 //            map.put("test_director","10"); // 跟踪审批员组 id
 //            map.put("role","03"); // 跟踪审批员组 id
-//            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+//            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
 //
 //            System.out.println("----taskName----" + taskName);
 //            // insert环节流转
@@ -178,7 +178,7 @@ public class RemoveRiskController extends BaseController {
 //            }
 //        } else if ("分行检测主管审核".equals(roles.get(0).getRoleName())) {
 //            // 执行预警认定审批任务
-//            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, user.getUserId() + "", map);
+//            String taskName = taskWFService.exeTaskByTaskInfoNo(taskInfoNo, String.valueOf(user.getUserId()), map);
 //
 //            System.out.println("----taskName----" + taskName);
 //            // insert环节流转
@@ -201,7 +201,7 @@ public class RemoveRiskController extends BaseController {
         SysUser user = loginUser.getUser();
 
         // 根据用户id查询代办任务
-        Map mapTask = taskWFService.taskWfUser(user.getUserId() + "");
+        Map mapTask = taskWFService.taskWfUser(String.valueOf(user.getUserId()));
         Set<String> set = new HashSet<>();
         // 只计算在里面的
         List listAll = taskInfoService.selectAllTaskInfoNo();
@@ -220,7 +220,7 @@ public class RemoveRiskController extends BaseController {
         }
 
         // 查询待办箱
-        if (set.size() > 0) list = taskInfoService.getWTaskInfoByList1(set);
+        if (!set.isEmpty()) list = taskInfoService.getWTaskInfoByList1(set);
 
 //        List list = new ArrayList();
 //
@@ -234,7 +234,7 @@ public class RemoveRiskController extends BaseController {
 //
 //        }else if ("市场零售部门主管审核".equals(roles.get(0).getRoleName()) || "分行风险检测岗审核".equals(roles.get(0).getRoleName()) || "分行监测审核岗审核".equals(roles.get(0).getRoleName())) {
 //            // 根据用户id查询代办任务
-//            List listNo = taskWFService.taskWfUser(user.getUserId() + "");
+//            List listNo = taskWFService.taskWfUser(String.valueOf(user.getUserId()));
 //            // 查询待办箱
 //            if (listNo.size() > 0) list = taskInfoService.getWTaskInfoByList3(listNo);
 
@@ -246,7 +246,7 @@ public class RemoveRiskController extends BaseController {
 //        SysUser user = loginUser.getUser();
 //
 //        // 根据用户id查询代办任务 id
-//        List listNO = taskWFService.taskWfUser(user.getUserId() + "");
+//        List listNO = taskWFService.taskWfUser(String.valueOf(user.getUserId()));
 //        // 查询待办箱
 //        if (listNO.size() > 0) list = taskInfoService.getWTaskInfoByList(listNO);
 

@@ -24,7 +24,7 @@ public class WLinkLogServiceImpl implements WLinkLogService {
      */
     @Override
     public int insertWLinkLog(String taskINfoNo, String taskType, String dealRole, String dealUser, String operation,
-                              String riskValue, String examinValue) {
+                              String riskControlMeasures, String examinValue) {
         WLinkLog wLinkLog = new WLinkLog();
         wLinkLog.setId(UUID.randomUUID().toString().replaceAll("-", "")); // 主键
         wLinkLog.setTaskInfoNo(taskINfoNo);
@@ -32,7 +32,7 @@ public class WLinkLogServiceImpl implements WLinkLogService {
         wLinkLog.setDealRole(dealRole); // 处理岗位
         wLinkLog.setDealUser(dealUser); // 处理岗位
         wLinkLog.setOperation(operation); // 操作
-        wLinkLog.setRiskValue(riskValue); // 风险措施
+        wLinkLog.setRiskValue(riskControlMeasures); // 风险措施
         wLinkLog.setExaminValue(examinValue); // 审核意见
         return wLinkLogMapper.insertWLinkLog(wLinkLog);
     }

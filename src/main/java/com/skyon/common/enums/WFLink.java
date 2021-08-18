@@ -26,8 +26,8 @@ public enum WFLink {
     WFLINK304("WF_LINK_304", "分行监测审核岗审核_预警解除"),
     WFLINK305("WF_LINK_305", "分行检测主管审核_预警解除");
 
-    private String code;
-    private String info;
+    private final String code;
+    private final String info;
 
     // 预警认定环节集合
     public static final List WFLINK1 = Arrays.asList(WFLINK101.getInfo(), WFLINK102.getInfo(),
@@ -42,7 +42,7 @@ public enum WFLink {
             WFLINK303.getInfo(), WFLINK304.getInfo(), WFLINK305.getInfo());
 
 
-    WFLink(String code, String info) {
+    private WFLink(String code, String info) {
         this.code = code;
         this.info = info;
     }

@@ -34,7 +34,7 @@ public class TDimensionTableServiceImpl implements ITDimensionTableService {
         List<TDimensionTable> listByNames = new ArrayList<>();
         if (split != null && split.length > 0) {
             listByNames = tDimensionTableMapper.getTDimensionTableListByNames(split);
-            if (listByNames != null && listByNames.size() > 0) {
+            if (listByNames != null && !listByNames.isEmpty()) {
                 for (int i = 0; i < listByNames.size(); i++) {
                     TDimensionTable table = listByNames.get(i);
                     joinSchema(table);

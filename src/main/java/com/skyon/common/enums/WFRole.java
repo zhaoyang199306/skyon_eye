@@ -24,8 +24,8 @@ public enum WFRole {
     WFROLE305("WF_ROLE_305","分行检测主管审核_预警解除角色");
 
 
-    private String code;
-    private String info;
+    private final String code;
+    private final String info;
 
 
     WFRole(String code, String info) {

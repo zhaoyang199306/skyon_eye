@@ -11,11 +11,11 @@ public enum RoleName {
     MONITORING_AUDIT_POST_AUDIT("04","分行监测审核岗审核"),
     INSPECTION_SUPERVISOR_AUDIT("05","分行检测主管审核");
 
-    private String code;
-    private String info;
+    private final String code;
+    private final String info;
 
 
-    RoleName(String code, String info) {
+    private RoleName(String code, String info) {
         this.code = code;
         this.info = info;
     }

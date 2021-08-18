@@ -1,6 +1,6 @@
 package com.skyon.project.system.domain.eye;
 
-import com.skyon.project.system.domain.ferghana.WTaskInfo;
+import com.skyon.project.system.domain.ferghana.DpApTaskInfo;
 
 /**
  * 债券信息类 T_Bond_Info
@@ -9,7 +9,7 @@ public class TBondInfo {
 
     private Long bondInfoID; // 主键
 
-    private Long taskInfoNo; // 预警基本信息对象 关联id
+    private String taskInfoNo; // 预警基本信息对象 关联id
 
     private String bondName; // 债券名称
 
@@ -21,21 +21,21 @@ public class TBondInfo {
 
     private String balance; // 余额(万元)
 
-    private WTaskInfo wTaskInfo; // 预警基本信息对象
+    private DpApTaskInfo dpApTaskInfo; // 预警基本信息对象
 
-    public WTaskInfo getwTaskInfo() {
-        return wTaskInfo;
+    public DpApTaskInfo getDpApTaskInfo() {
+        return dpApTaskInfo;
     }
 
-    public void setwTaskInfo(WTaskInfo wTaskInfo) {
-        this.wTaskInfo = wTaskInfo;
+    public void setDpApTaskInfo(DpApTaskInfo dpApTaskInfo) {
+        this.dpApTaskInfo = dpApTaskInfo;
     }
 
-    public Long getTaskInfoNo() {
+    public String getTaskInfoNo() {
         return taskInfoNo;
     }
 
-    public void setTaskInfoNo(Long taskInfoNo) {
+    public void setTaskInfoNo(String taskInfoNo) {
         this.taskInfoNo = taskInfoNo;
     }
 
