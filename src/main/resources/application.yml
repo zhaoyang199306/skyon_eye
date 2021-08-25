@@ -14,7 +14,7 @@ ruoyi:
   profile: /home/ferghana/install/flink-1.11.1/lib
   profileTwo: /home/ferghana/software/flink-1.11.1/lib
 #   获取ip地址开关
-  addressEnabled: true
+  addressEnabled: false
 
 # 开发环境配置
 server:
@@ -92,9 +92,9 @@ spring:
 # token配置
 token:
     # 令牌自定义标识
-    header: Authorization
+    header: AuthorizationEye
     # 令牌秘钥
-    secret: abcdefghijklmnopqrstuvwxyz
+    secret: abcdefghijklmnopqrstuvwxyzEye
     # 令牌有效期（默认30分钟）
     expireTime: 14400
   

@@ -57,12 +57,12 @@ public class SwaggerConfig
     }
 
     /**
-     * 安全模式，这里指定token通过Authorization头请求头传递
+     * 安全模式，这里指定token通过AuthorizationEye头请求头传递
      */
     private List<ApiKey> securitySchemes()
     {
         List<ApiKey> apiKeyList = new ArrayList<ApiKey>();
-        apiKeyList.add(new ApiKey("Authorization", "Authorization", "header"));
+        apiKeyList.add(new ApiKey("AuthorizationEye", "AuthorizationEye", "header"));
         return apiKeyList;
     }
     
@@ -89,7 +89,7 @@ public class SwaggerConfig
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         List<SecurityReference> securityReferences = new ArrayList<>();
-        securityReferences.add(new SecurityReference("Authorization", authorizationScopes));
+        securityReferences.add(new SecurityReference("AuthorizationEye", authorizationScopes));
         return securityReferences;
     }
 

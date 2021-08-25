@@ -7,6 +7,7 @@ import com.skyon.common.enums.RoleName;
 import com.skyon.common.enums.WFLink;
 import com.skyon.common.enums.WFRole;
 import com.skyon.common.utils.ServletUtils;
+import com.skyon.common.utils.spring.SpringUtils;
 import com.skyon.framework.manager.factory.WfDealRoleRegisterFactory;
 import com.skyon.framework.security.LoginUser;
 import com.skyon.framework.security.service.TokenService;
@@ -20,8 +21,11 @@ import com.skyon.project.system.domain.ferghana.DpApTaskInfo;
 import com.skyon.project.system.service.*;
 import com.skyon.project.system.service.activiti.RunWFService;
 import com.skyon.project.system.service.activiti.TaskWFService;
+import com.skyon.project.system.service.impl.SysDictDataServiceImpl;
 import com.skyon.project.system.service.wf.TaskSubmitService;
+import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
@@ -30,6 +34,7 @@ import java.io.*;
 import java.net.*;
 import java.time.LocalDateTime;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -65,6 +70,8 @@ public class TaskInfoController extends BaseController {
         List<DpApTaskInfo> list = new ArrayList<>();
 
         LoginUser loginUser = tokenService.getLoginUser(ServletUtils.getRequest());
+
+
         SysUser user = loginUser.getUser();
         List<SysRole> roles = user.getRoles();
 
